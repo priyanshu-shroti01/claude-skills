@@ -1,0 +1,208 @@
+# ════════════════════════════════════════════════════════════════════
+# Claude OS — System Manifest
+# The single versioned inventory of the system. scripts/verify.sh
+# cross-checks this file against the repository; scripts/bootstrap.sh
+# and scripts/install.sh consume it. Semantic versioning throughout.
+# ════════════════════════════════════════════════════════════════════
+
+system:
+  name: "Claude OS"
+  version: "0.1.0"            # keep in sync with VERSION
+  description: >
+    Reusable AI engineering, design, product and growth operating system
+    for Claude Code. GitHub-first, reproducible, permission-controlled.
+  homepage: "https://github.com/priyanshu-shroti01/claude-skills"
+
+requirements:
+  os:
+    supported: [linux, macos]
+    windows: "via WSL2 (native PowerShell not yet supported — see docs/installation/bootstrap.md)"
+  node:
+    minimum: "20.0.0"
+    recommended: "22.x"
+  python:
+    minimum: "3.10"
+    required_for: [validation-scripts, hooks]
+  git:
+    minimum: "2.30"
+  tools:
+    required: [claude, git, node, npm]
+    recommended: [jq, python3]
+
+# ── Core components ──────────────────────────────────────────────────
+# status: required | optional | evaluation | blocked
+# Full dependency records (license, security notes, pin): config/skills/external-skills.yaml
+core:
+  claude_code: { status: required, min_version: "2.0.0" }
+  skill_router: { status: required, source: internal, path: skills/core/skill-router }
+  quality_pipeline: { status: required, source: internal, path: skills/core/quality-pipeline }
+  claude_mem: { status: required, source: external, ref: claude-mem }
+  knowledge_graph: { status: required, source: external, ref: graphify }
+
+design:
+  frontend_design: { status: required, source: external, ref: anthropic-skills }
+  web_design_guidelines: { status: required, source: external, ref: vercel-agent-skills }
+  impeccable: { status: required, source: external, ref: impeccable }
+  shadcn: { status: required, source: external, ref: shadcn-ui }
+  design_direction: { status: required, source: internal, path: skills/design/design-direction }
+  anti_slop: { status: required, source: internal, path: skills/design/anti-slop }
+  figma: { status: optional, source: external, ref: figma-mcp }
+  react_bits: { status: optional, source: external, ref: react-bits }
+  motion_primitives: { status: optional, source: external, ref: motion-primitives }
+  claude_design_skills: { status: evaluation, source: external, ref: claude-design-skills }
+
+engineering:
+  superpowers: { status: required, source: external, ref: superpowers }
+  react_best_practices: { status: required, source: external, ref: vercel-agent-skills }
+  code_review: { status: required, source: internal, path: agents/code-reviewer }
+  frontend_standards: { status: required, source: internal, path: skills/frontend }
+  backend_standards: { status: required, source: internal, path: skills/backend }
+
+testing:
+  playwright_mcp: { status: required, source: external, ref: playwright-mcp }
+  lighthouse: { status: required, source: external, ref: lighthouse }
+  agent_browser: { status: evaluation, source: external, ref: agent-browser }
+  visual_qa: { status: required, source: internal, path: skills/qa/visual-qa }
+
+security:
+  security_policy: { status: required, source: internal, path: SECURITY.md }
+  secure_coding: { status: required, source: internal, path: skills/security/secure-coding }
+  owasp_cheat_sheets: { status: required, source: external, ref: owasp-cheatsheets, method: reference-only }
+
+seo:
+  technical_seo: { status: required, source: internal, path: skills/seo/technical-seo }
+  geo: { status: required, source: internal, path: skills/seo/geo }
+  claude_seo: { status: evaluation, source: external, ref: claude-seo }
+
+media:
+  media_pipeline: { status: optional, source: internal, path: skills/media }
+  image_generation: { status: optional, source: external, ref: image-provider, note: provider-abstracted }
+  video_generation: { status: optional, source: external, ref: video-provider, note: provider-abstracted }
+
+three_d:
+  react_three_fiber: { status: optional, source: external, ref: react-three-fiber }
+  drei: { status: optional, source: external, ref: drei }
+  exploded_views: { status: optional, source: internal, path: skills/3d/exploded-views }
+  gsap: { status: optional, source: external, ref: gsap }
+
+growth:
+  growth_analysis: { status: optional, source: internal, path: skills/growth/growth-analysis }
+  lead_research: { status: optional, source: internal, path: skills/growth/lead-research }
+  scout: { status: blocked, source: external, ref: scout, note: "ToS/GDPR exposure + stale — see docs/dependencies.md" }
+
+orchestration:
+  workflows: { status: required, source: internal, path: workflows }
+  ruflo: { status: evaluation, source: external, ref: ruflo }
+  gstack: { status: evaluation, source: external, ref: gstack }
+
+# ── Agents (29) — definitions in .claude/agents/, charters in agents/ ─
+agents:
+  - commander
+  - skill-router
+  - product-director
+  - design-director
+  - ux-researcher
+  - ux-designer
+  - visual-designer
+  - frontend-architect
+  - frontend-engineer
+  - backend-architect
+  - backend-engineer
+  - motion-director
+  - 3d-director
+  - exploded-view-director
+  - media-director
+  - research-agent
+  - competitor-agent
+  - seo-agent
+  - accessibility-agent
+  - security-agent
+  - code-reviewer
+  - qa-agent
+  - visual-qa-agent
+  - performance-agent
+  - anti-slop-agent
+  - production-agent
+  - growth-agent
+  - lead-scout
+  - learning-agent
+
+# ── Workflows (15) — definitions in workflows/<name>/WORKFLOW.md ─────
+workflows:
+  - new-project
+  - new-website
+  - premium-website
+  - redesign
+  - product-launch
+  - bug-fix
+  - feature-development
+  - security-audit
+  - visual-audit
+  - seo-audit
+  - accessibility-audit
+  - performance-audit
+  - production-audit
+  - continuous-growth
+  - overnight-improvement
+
+# ── Internal skills — skills/<category>/<name>/SKILL.md ──────────────
+skills:
+  core: [skill-router, quality-pipeline, memory, graph-knowledge]
+  design: [design-direction, anti-slop, design-review]
+  frontend: [frontend-standards, component-quality]
+  backend: [api-standards, data-safety]
+  research: [research-intelligence, competitor-analysis]
+  security: [secure-coding, secrets-hygiene]
+  qa: [functional-qa, visual-qa]
+  seo: [technical-seo, geo]
+  media: [image-generation, video-generation]
+  "3d": [r3f-scenes, exploded-views]
+  growth: [growth-analysis, lead-research]
+  production: [production-readiness, deployment-gates]
+
+# ── MCP integrations — templates in config/mcp/ ──────────────────────
+mcp:
+  playwright: { status: required, template: config/mcp/playwright.json }
+  shadcn: { status: required, template: config/mcp/shadcn.json }
+  github: { status: optional, template: config/mcp/github.json }
+  figma: { status: optional, template: config/mcp/figma.json }
+
+# ── Security & permissions ───────────────────────────────────────────
+security:
+  permission_levels: config/permissions/permission-levels.yaml
+  approval_required: config/permissions/approval-required.yaml
+  max_autonomy_default: 3
+  hooks: [.claude/hooks/pre-tool-guard.sh, .claude/hooks/session-start.sh]
+
+# ── Environment variables (placeholders in .env.example) ─────────────
+environment:
+  optional:
+    - ANTHROPIC_API_KEY
+    - GITHUB_TOKEN
+    - FIGMA_ACCESS_TOKEN
+    - MEDIA_PROVIDER
+    - IMAGE_API_KEY
+    - VIDEO_PROVIDER
+    - VIDEO_API_KEY
+    - GOOGLE_APPLICATION_CREDENTIALS
+    - ANALYTICS_PROPERTY_ID
+    - SEARCH_CONSOLE_SITE_URL
+    - STAGING_DEPLOY_HOOK
+    - PRODUCTION_DEPLOY_HOOK
+  behavior:
+    - CLAUDE_OS_MAX_AUTONOMY
+    - CLAUDE_OS_HOME
+
+# ── Provider configuration ───────────────────────────────────────────
+providers:
+  media: config/providers/media.yaml
+
+# ── Feature flags ────────────────────────────────────────────────────
+features:
+  media_generation: { default: off, reason: "requires provider credentials" }
+  video_generation: { default: off, reason: "requires provider credentials" }
+  three_d: { default: off, reason: "enable per project" }
+  lead_scout: { default: off, reason: "human enables per engagement" }
+  continuous_operation: { default: off, reason: "server deployments only; see docs/operations" }
+  auto_deploy_staging: { default: off, reason: "L4 approval-gated by default" }
+  auto_deploy_production: { default: off, reason: "L5 always approval-gated" }

@@ -1,0 +1,355 @@
+# ════════════════════════════════════════════════════════════════════
+# Claude OS — External Dependency Registry
+# Consumed by scripts/bootstrap.sh / install.sh; human record in
+# docs/dependencies.md (keep both in sync — verify.sh cross-checks refs).
+#
+# status: required | optional | evaluation | blocked
+#   required   — bootstrap installs by default
+#   optional   — bootstrap installs with --with-optional or per-component flag
+#   evaluation — NEVER auto-installed; human evaluates first (docs note why)
+#   blocked    — do not install; reason + alternative recorded
+#
+# All facts verified 2026-08-21 against the listed URLs (web research).
+# Pins are the latest verified versions; update via scripts/update.sh
+# after reviewing changelogs.
+# ════════════════════════════════════════════════════════════════════
+
+registry:
+
+  # ── Core ──────────────────────────────────────────────────────────
+  claude-mem:
+    status: required
+    url: https://github.com/thedotmack/claude-mem
+    license: Apache-2.0
+    version_pin: "13.15.3"
+    install: "npx claude-mem@13.15.3 install"
+    verify: "claude-mem status || test -d ~/.claude-mem"
+    purpose: persistent memory layer (skills/core/memory)
+    security_notes: >
+      Installs session lifecycle hooks; stores full session activity in
+      local SQLite/Chroma. Review its hooks post-install. Never let it
+      capture secrets (secrets stay out of sessions per SECURITY.md).
+    maintenance: active (verified 2026-08-20 push, v13.15.3 npm)
+
+  graphify:
+    status: required
+    url: https://github.com/Graphify-Labs/graphify
+    license: Apache-2.0
+    version_pin: "0.9.48"
+    install: "python3 -m pip install --user 'graphifyy==0.9.48' && graphify install"
+    verify: "command -v graphify"
+    purpose: codebase knowledge graph (skills/core/graph-knowledge)
+    security_notes: >
+      Local tree-sitter AST parsing, on-device, no vector store. Use the
+      Graphify-Labs org repo ONLY — several similarly-named mirrors exist
+      (rhanka/graphify, graphify.net are NOT canonical). The hosted
+      app.graphify.com service is out of scope; local mode only.
+    maintenance: active (verified 2026-08-20 push)
+
+  superpowers:
+    status: required
+    url: https://github.com/obra/superpowers
+    license: MIT
+    version_pin: "v6.3.0"
+    install: "claude plugin: /plugin install superpowers@claude-plugins-official"
+    verify: "plugin listed in /plugin"
+    purpose: engineering methodology skills (planning, TDD, debugging, worktrees)
+    security_notes: reputable author (obra); plugin-marketplace distribution
+    maintenance: active (v6.3.0 released 2026-08-12)
+
+  anthropic-skills:
+    status: required
+    url: https://github.com/anthropics/skills
+    license: "Apache-2.0 (most skills); docx/pdf/pptx/xlsx are source-available (custom license)"
+    version_pin: rolling
+    install: "/plugin marketplace add anthropics/skills; /plugin install example-skills@anthropic-agent-skills"
+    verify: "frontend-design skill available"
+    purpose: official Anthropic skills incl. frontend-design, webapp-testing, mcp-builder
+    security_notes: first-party Anthropic; document skills' custom license noted for redistribution
+    maintenance: active (official)
+
+  # ── Design ────────────────────────────────────────────────────────
+  vercel-agent-skills:
+    status: required
+    url: https://github.com/vercel-labs/agent-skills
+    license: MIT
+    version_pin: rolling
+    install: "npx skills add vercel-labs/agent-skills (or copy selected skills)"
+    verify: "react-best-practices + web-design-guidelines skills present"
+    purpose: react-best-practices, web-design-guidelines, composition-patterns
+    security_notes: official Vercel Labs; low risk
+    maintenance: active
+
+  impeccable:
+    status: required
+    url: https://github.com/pbakaus/impeccable
+    license: Apache-2.0
+    version_pin: rolling
+    install: "/plugin marketplace add pbakaus/impeccable (canonical repo only — clones exist)"
+    verify: "impeccable commands available in /plugin"
+    purpose: design-language skill set, anti-pattern detection, live browser mode
+    security_notes: >
+      Canonical repo is pbakaus/impeccable (Paul Bakaus). Beware clone
+      repos with similar names. Overlaps our internal anti-slop skill —
+      see docs/architecture/skill-overlap.md for the division of labor.
+    maintenance: active
+
+  shadcn-ui:
+    status: required
+    url: https://github.com/shadcn-ui/ui
+    license: MIT
+    version_pin: "shadcn@latest (registry-based)"
+    install: "per project: npx shadcn@latest init; MCP: config/mcp/shadcn.json"
+    verify: "/mcp shows shadcn; components.json in project"
+    purpose: component system raw material (skills/frontend/component-quality)
+    security_notes: components copy into the project; first-party MCP
+    maintenance: active (canonical)
+
+  react-bits:
+    status: optional
+    url: https://github.com/DavidHDev/react-bits
+    license: "MIT + Commons Clause v1.0 — NOT plain MIT"
+    version_pin: rolling
+    install: "per component: npx shadcn@latest add @react-bits/<Component>"
+    verify: component renders in project
+    purpose: animated React components
+    security_notes: >
+      LICENSE RESTRICTION: Commons Clause forbids selling/sublicensing/
+      redistributing the components themselves. Fine inside client
+      products; NEVER re-ship in a redistributed component library.
+    maintenance: active
+
+  motion-primitives:
+    status: optional
+    url: https://github.com/ibelick/motion-primitives
+    license: MIT
+    version_pin: rolling (beta)
+    install: "per component from motion-primitives.com docs (copy-in)"
+    verify: component renders in project
+    purpose: motion components on Motion + Tailwind
+    security_notes: beta — occasional breaking changes; components copy-in
+    maintenance: active beta
+
+  figma-mcp:
+    status: optional
+    url: https://developers.figma.com/docs/figma-mcp-server/
+    license: proprietary Figma service (beta)
+    version_pin: n/a (remote service)
+    install: "config/mcp/figma.json (remote https://mcp.figma.com/mcp; OAuth via /mcp)"
+    verify: "/mcp shows figma authenticated"
+    purpose: design-to-code from Figma files
+    security_notes: >
+      PLAN GATING: full access needs a Dev/Full seat on Professional+
+      plans; Starter/View seats are heavily limited. Free during beta,
+      usage-based pricing planned.
+    maintenance: official Figma product
+
+  claude-design-skills:
+    status: evaluation
+    url: https://github.com/freshtechbro/claudedesignskills
+    license: MIT
+    version_pin: rolling
+    install: "EVALUATE FIRST - /plugin marketplace add freshtechbro/claudedesignskills"
+    verify: n/a until adopted
+    purpose: 22 design skills + bundles (Three.js, GSAP, R3F, Rive, Spline)
+    security_notes: >
+      No canonical "Claude Design Skills" exists; this is the closest
+      community match. Alternative: Owl-Listener/designer-skills. Vet
+      skill prompts before granting to agents. Overlaps impeccable +
+      internal design skills — adopt selectively, not wholesale.
+    maintenance: active (community, individual)
+
+  # ── Engineering / QA ─────────────────────────────────────────────
+  playwright-mcp:
+    status: required
+    url: https://github.com/microsoft/playwright-mcp
+    license: Apache-2.0
+    version_pin: "0.0.79"
+    install: "config/mcp/playwright.json (npx @playwright/mcp@latest)"
+    verify: "/mcp shows playwright"
+    purpose: browser automation for qa/visual-qa (PRIMARY browser harness)
+    security_notes: official Microsoft; accessibility-snapshot driven
+    maintenance: active
+
+  agent-browser:
+    status: evaluation
+    url: https://github.com/vercel-labs/agent-browser
+    license: Apache-2.0
+    version_pin: "0.34.0"
+    install: "EVALUATE FIRST - npm install -g agent-browser && agent-browser install"
+    verify: n/a until adopted
+    purpose: alternative browser harness (Rust CLI + CDP, low-token snapshots)
+    security_notes: >
+      Overlaps playwright-mcp — the overlap ruling (skill-overlap.md)
+      selects Playwright MCP as primary; do not run both as defaults.
+    maintenance: active (Vercel Labs experimental)
+
+  lighthouse:
+    status: required
+    url: https://github.com/GoogleChrome/lighthouse
+    license: Apache-2.0
+    version_pin: "13.4.1"
+    install: "npm install -g lighthouse@13.4.1"
+    verify: "lighthouse --version"
+    purpose: performance/SEO/a11y measurement (performance-agent)
+    security_notes: Google-maintained; standard tooling
+    maintenance: active
+
+  # ── Security (reference-only) ────────────────────────────────────
+  owasp-cheatsheets:
+    status: required
+    url: https://github.com/OWASP/CheatSheetSeries
+    license: "CC-BY-SA-4.0 — NOT MIT; copyleft for content"
+    version_pin: living document
+    install: "reference-only — LINK, never vendor text into this MIT repo"
+    verify: n/a (no install)
+    purpose: security reference of record (references/security/)
+    security_notes: >
+      LICENSE: copied/derived text must credit OWASP and carry CC-BY-SA.
+      We therefore link (cheatsheetseries.owasp.org) instead of vendoring.
+    maintenance: active
+
+  # ── SEO ───────────────────────────────────────────────────────────
+  claude-seo:
+    status: evaluation
+    url: https://github.com/AgriciDaniel/claude-seo
+    license: MIT
+    version_pin: "v2.2.4"
+    install: "EVALUATE FIRST - /plugin marketplace add AgriciDaniel/claude-seo"
+    verify: n/a until adopted
+    purpose: 25 SEO sub-skills + 18 sub-agents (technical, schema, GEO/AEO)
+    security_notes: >
+      Single-maintainer bus-factor; optional paid extensions (DataForSEO,
+      Firecrawl). Audit skill prompts before install. Internal
+      technical-seo + geo skills cover the baseline meanwhile.
+    maintenance: active (single maintainer)
+
+  # ── 3D / Motion ──────────────────────────────────────────────────
+  react-three-fiber:
+    status: optional
+    url: https://github.com/pmndrs/react-three-fiber
+    license: MIT
+    version_pin: "9.7.0"
+    install: "per project: npm i three @react-three/fiber@9"
+    verify: project builds with a Canvas
+    purpose: React renderer for Three.js (skills/3d/r3f-scenes)
+    security_notes: "React 19 requires fiber v9 line"
+    maintenance: active (pmndrs)
+
+  drei:
+    status: optional
+    url: https://github.com/pmndrs/drei
+    license: MIT
+    version_pin: "10.7.8"
+    install: "per project: npm i @react-three/drei@10"
+    verify: imports resolve
+    purpose: R3F helper library (pairs with fiber v9)
+    security_notes: none
+    maintenance: active (pmndrs)
+
+  gsap:
+    status: optional
+    url: https://github.com/greensock/GSAP
+    license: "GSAP Standard 'no charge' license (Webflow-owned; custom, not OSI)"
+    version_pin: "3.x (>=3.13)"
+    install: "per project: npm i gsap"
+    verify: imports resolve
+    purpose: timeline-heavy narrative animation (motion-director tooling)
+    security_notes: >
+      100% free incl. former Club plugins since 3.13 (Webflow). License
+      restrictions: no use inside no-code animation builders competing
+      with Webflow; keep proprietary notices.
+    maintenance: active (Webflow)
+
+  scroll-world:
+    status: optional
+    url: https://github.com/oso95/scroll-world
+    license: MIT
+    version_pin: rolling
+    install: "/plugin marketplace add oso95/scroll-world (evaluate cost model first)"
+    verify: n/a until adopted
+    purpose: scroll-scrubbed video fly-through landing pages
+    security_notes: >
+      NOT an R3F library — generates scroll-scrubbed AI video pages.
+      Requires paid third-party generation services (per-clip billing) +
+      ffmpeg. Young project (2026-07). Name collides with unrelated repos.
+    maintenance: young, active-ish
+
+  # ── Media generation ─────────────────────────────────────────────
+  claude-image-gen:
+    status: evaluation
+    url: https://github.com/guinacio/claude-image-gen
+    license: MIT
+    version_pin: rolling
+    install: "EVALUATE FIRST - /plugin install guinacio/claude-image-gen"
+    verify: n/a until adopted
+    purpose: image generation skill/MCP (Gemini + OpenAI providers)
+    security_notes: >
+      Small community project (low traction). Requires your own API keys
+      (cost). Fits our provider abstraction (config/providers/media.yaml).
+      Alternatives exist (shipdeckai/image-gen).
+    maintenance: unclear (low activity)
+
+  omni-skill-claude:
+    status: evaluation
+    url: https://github.com/xbill9/omni-skill-claude
+    license: Apache-2.0
+    version_pin: rolling
+    install: "REFERENCE ONLY — do not depend on it"
+    verify: n/a
+    purpose: video generation reference (Gemini video APIs)
+    security_notes: >
+      0 stars / 1 commit — a personal demo with zero community vetting.
+      Treat as reference code for our own video pipeline, not a
+      dependency. Alternative: SamurAIGPT/Generative-Media-Skills.
+    maintenance: effectively unmaintained
+
+  # ── Growth ────────────────────────────────────────────────────────
+  scout:
+    status: blocked
+    url: https://github.com/kiryano/Scout
+    license: MIT
+    version_pin: n/a
+    install: "DO NOT INSTALL"
+    verify: n/a
+    purpose: (evaluated) lead-gen scraping tool
+    security_notes: >
+      STATUS: BLOCKED.
+      REASON: scrapes Instagram/TikTok/LinkedIn etc. against platform
+      ToS; harvests + SMTP-probes personal emails (GDPR/CAN-SPAM and
+      IP-blacklisting exposure); no legal disclaimers; stale (~6 months,
+      no releases, "early access").
+      ALTERNATIVE: skills/growth/lead-research — lawful manual public-data
+      research with approval-gated, human-executed outreach.
+    maintenance: stale (last push 2026-02-22)
+
+  # ── Orchestration (evaluation) ───────────────────────────────────
+  ruflo:
+    status: evaluation
+    url: https://github.com/ruvnet/ruflo
+    license: MIT
+    version_pin: "3.38.12"
+    install: "EVALUATE IN SANDBOX FIRST - npx ruflo@latest init"
+    verify: n/a until adopted
+    purpose: multi-agent orchestration meta-harness (claude-flow rebrand)
+    security_notes: >
+      Very large attack/complexity surface: executes shell commands,
+      installs 27-hook system + MCP servers, cross-machine federation.
+      Benchmark claims are self-reported. Claude OS's workflows + native
+      subagents cover current needs — adopt only if a concrete gap
+      appears, and only after sandboxed evaluation.
+    maintenance: very active
+
+  gstack:
+    status: evaluation
+    url: https://github.com/garrytan/gstack
+    license: MIT
+    version_pin: rolling (VERSION file in repo)
+    install: "EVALUATE FIRST - clone + READ ./setup before running"
+    verify: n/a until adopted
+    purpose: 23 opinionated role-skills (think→plan→build→review→ship)
+    security_notes: >
+      Installs into ~/.claude/skills via setup script — read it first
+      (SECURITY.md §4). Single-instance role switching overlaps our agent
+      roster heavily; per skill-overlap.md we do not install it wholesale.
+    maintenance: active

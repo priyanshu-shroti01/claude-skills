@@ -1,0 +1,40 @@
+# Claude OS — Agent Manifest
+# Cross-check target for verify.sh: every agent here must have
+# .claude/agents/<name>.md and agents/<name>/README.md, and appear in
+# SYSTEM_MANIFEST.yaml. Ceilings must match permission-levels.yaml.
+
+agents:
+  - { name: commander,             group: orchestration, ceiling: 3 }
+  - { name: skill-router,          group: orchestration, ceiling: 0 }
+  - { name: product-director,      group: product,       ceiling: 1 }
+  - { name: design-director,       group: design,        ceiling: 1 }
+  - { name: ux-researcher,         group: design,        ceiling: 0 }
+  - { name: ux-designer,           group: design,        ceiling: 1 }
+  - { name: visual-designer,       group: design,        ceiling: 1 }
+  - { name: frontend-architect,    group: engineering,   ceiling: 1 }
+  - { name: frontend-engineer,     group: engineering,   ceiling: 3 }
+  - { name: backend-architect,     group: engineering,   ceiling: 1 }
+  - { name: backend-engineer,      group: engineering,   ceiling: 3 }
+  - { name: motion-director,       group: design,        ceiling: 1 }
+  - { name: 3d-director,           group: media3d,       ceiling: 2 }
+  - { name: exploded-view-director, group: media3d,      ceiling: 2 }
+  - { name: media-director,        group: media3d,       ceiling: 2 }
+  - { name: research-agent,        group: research,      ceiling: 0 }
+  - { name: competitor-agent,      group: research,      ceiling: 0 }
+  - { name: seo-agent,             group: quality,       ceiling: 2 }
+  - { name: accessibility-agent,   group: quality,       ceiling: 2 }
+  - { name: security-agent,        group: quality,       ceiling: 2 }
+  - { name: code-reviewer,         group: quality,       ceiling: 0 }
+  - { name: qa-agent,              group: quality,       ceiling: 2 }
+  - { name: visual-qa-agent,       group: quality,       ceiling: 2 }
+  - { name: performance-agent,     group: quality,       ceiling: 2 }
+  - { name: anti-slop-agent,       group: quality,       ceiling: 0 }
+  - { name: production-agent,      group: operations,    ceiling: 4 }
+  - { name: growth-agent,          group: growth,        ceiling: 0 }
+  - { name: lead-scout,            group: growth,        ceiling: 0 }
+  - { name: learning-agent,        group: orchestration, ceiling: 3 }
+
+invariants:
+  - implementer_never_reviews_own_work: true
+  - reviewers_read_only_on_reviewed_artifact: true
+  - l4_l5_always_human_approved: true

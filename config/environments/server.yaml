@@ -1,0 +1,35 @@
+# Environment profile: always-on server / VPS (24/7 operation)
+profile: server
+description: unattended scheduled operation; human reviews asynchronously
+
+autonomy:
+  max_level: 3            # HARD: overnight-improvement never exceeds L3
+  interactive: false
+
+features:
+  media_generation: per-env
+  three_d: per-project
+  continuous_operation: on       # scheduled workflows enabled
+  lead_scout: off                # human enables per engagement
+
+operations:                       # consumed by docs/operations conventions
+  state_dir: ${CLAUDE_OS_HOME}/state
+  log_dir: ${CLAUDE_OS_HOME}/logs
+  lock_dir: ${CLAUDE_OS_HOME}/locks
+  log_retention_days: 30
+  lock_stale_minutes: 180        # locks older than this are considered stale
+  retry:
+    max_attempts: 3
+    backoff_seconds: [60, 300, 900]
+  watchdog:
+    run_budget_minutes: 240      # overnight run hard budget
+    graceful_shutdown_seconds: 60
+  schedule:                      # install via cron/systemd - see docs/operations
+    overnight_improvement: "0 2 * * *"
+    continuous_growth: "0 6 * * 1"
+    doctor_healthcheck: "0 */6 * * *"
+
+tooling:
+  browsers: headless
+  claude_mem: on
+  graphify: on

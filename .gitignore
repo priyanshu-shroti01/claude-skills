@@ -1,0 +1,62 @@
+# ── Secrets & credentials — never commit ─────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*.json
+*.secret
+secrets.json
+secrets.yaml
+secrets.yml
+.mcp.local.json
+config/mcp/*.local.json
+
+# ── Local machine state (lives in ~/.claude-os, but guard anyway) ─
+.claude-os/
+*.lock
+!package-lock.json
+!pnpm-lock.yaml
+
+# ── Vendored external repos (installed by scripts, never committed)
+vendor/
+
+# ── Generated / linked at install time ───────────────────────────
+.claude/skills/*
+!.claude/skills/README.md
+
+# ── Dependencies & build output ──────────────────────────────────
+node_modules/
+dist/
+build/
+.next/
+out/
+coverage/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ── Logs & temp ──────────────────────────────────────────────────
+logs/
+*.log
+tmp/
+.tmp/
+.cache/
+.DS_Store
+Thumbs.db
+
+# ── Editor noise ─────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Test artifacts ───────────────────────────────────────────────
+tests/.sandbox/
+playwright-report/
+test-results/
+screenshots/
+lighthouse-reports/

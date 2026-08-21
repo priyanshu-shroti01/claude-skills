@@ -1,0 +1,42 @@
+# {{PROJECT_NAME}} — Claude Operating Charter
+
+This project runs on **Claude OS** ({{CLAUDE_OS_PATH}}). The OS charter
+(CLAUDE.md), SECURITY.md, DESIGN.md and the permission model there are
+binding here. This file adds only project specifics.
+
+## Project
+
+- **What it is**: {{PROJECT_DESCRIPTION}}
+- **Stack**: {{PROJECT_STACK}}
+- **Initialized**: {{DATE}} by scripts/project-init.sh
+
+## Conventions
+
+<!-- Filled in as the project develops. Inspect before assuming. -->
+- Package manager: {{PACKAGE_MANAGER}}
+- Test command: {{TEST_COMMAND}}
+- Build command: {{BUILD_COMMAND}}
+- Dev server: {{DEV_COMMAND}}
+
+## Project rules
+
+1. Follow the Claude OS quality pipeline; the gates that apply are decided
+   per task by the Skill Router, not skipped by habit.
+2. This project's `DESIGN.md` is the visual law for all UI work.
+3. `PRODUCTION_READINESS.md` (project copy) gates every release.
+4. Structural knowledge → `GRAPH_REPORT.md` (regenerate after big
+   changes). Historical decisions → memory, per Claude OS conventions.
+5. Update this file when conventions solidify — an inaccurate charter is
+   worse than none.
+
+## Key paths
+
+<!-- Keep current: entry points, config, where things live. -->
+- …
+
+## Decisions log
+
+Significant architectural decisions get an ADR under `docs/decisions/`
+(create on first use). One line each here:
+
+- {{DATE}}: project initialized on Claude OS v{{CLAUDE_OS_VERSION}}.

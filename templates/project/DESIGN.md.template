@@ -1,0 +1,68 @@
+# {{PROJECT_NAME}} — Design Language
+
+Instantiates the Claude OS design philosophy (root DESIGN.md) for this
+project. Created by design-direction (skills/design/design-direction);
+binding for all UI work here. Sections marked TODO block high-fidelity
+work until filled.
+
+## Direction statement
+
+TODO — 3–5 falsifiable sentences: the personality and point of view.
+("Clean and modern" is not a direction.)
+
+## Typography
+
+- Families (max 2 + optional mono) and WHY each: TODO
+- Scale: base TODO px, ratio TODO, steps: TODO
+- Usage rules (weight/case/spacing per level): TODO
+
+## Color
+
+| Role | Value | Usage |
+|---|---|---|
+| Dominant | TODO | TODO |
+| Supporting | TODO | TODO |
+| Accent (scarce) | TODO | TODO |
+| Semantic (success/warn/error) | TODO | TODO |
+| Neutrals | TODO | TODO |
+
+- Contrast-checked text pairs: TODO
+- Dark mode: designed / out of scope (choose + reason): TODO
+
+## Spacing & layout
+
+- Base unit: TODO · scale: TODO
+- Grid/container behavior: TODO
+- Section rhythm rules: TODO
+
+## Shape & depth
+
+- Radius language: TODO
+- Border vs. shadow philosophy; elevation levels: TODO
+
+## Motion language
+
+- Duration bands: feedback 120–200ms · transitions 200–400ms · narrative: TODO
+- Easing set (named, with roles): TODO
+- What may move / what never moves: TODO
+- Reduced-motion stance: required (how, per surface): TODO
+
+## Imagery direction
+
+- Subject matter & mood: TODO
+- Photography vs. illustration vs. code-drawn: TODO
+- Treatment (color, crop, texture): TODO
+
+## Voice
+
+- Tone, person, sentence length: TODO
+- Words we use / never use: TODO
+
+## Anti-slop stance
+
+Category clichés this project must specifically avoid (from competitor
+research): TODO
+
+## Change log
+
+- {{DATE}}: created (empty language — direction work pending).

@@ -1,0 +1,50 @@
+# Claude OS — Media Provider Abstraction
+# The Media Director's pipelines resolve providers HERE, never in project
+# code or skills. Select via env: MEDIA_PROVIDER / VIDEO_PROVIDER.
+# Keys via env only (.env, never committed). Adding a provider = adding an
+# entry here + its env var names to .env.example. No other file changes.
+
+image:
+  selected_by: MEDIA_PROVIDER          # e.g. "gemini" | "openai" | "none"
+  default: none                        # generation off until configured
+  providers:
+    gemini:
+      kind: api
+      env: [IMAGE_API_KEY]
+      notes: >
+        Google image models via API key. Route through the evaluated
+        claude-image-gen integration (integrations/media/) or direct API
+        per project. Record model id + prompt with each asset.
+    openai:
+      kind: api
+      env: [IMAGE_API_KEY]
+      notes: >
+        OpenAI image models (gpt-image class). Supports inpainting.
+        Record model id + prompt with each asset.
+    none:
+      kind: disabled
+      notes: >
+        Pipelines emit STATUS: BLOCKED (provider unconfigured) instead of
+        generating. CSS/SVG/code alternatives still apply.
+
+video:
+  selected_by: VIDEO_PROVIDER
+  default: none
+  providers:
+    gemini:
+      kind: api
+      env: [VIDEO_API_KEY]
+      notes: >
+        Google video generation via API key (see integrations/media/ for
+        the evaluated skill options). Storyboard + keyframes first, per
+        skills/media/video-generation.
+    none:
+      kind: disabled
+      notes: video pipeline emits STATUS BLOCKED until configured.
+
+usage_rules:
+  - provider terms govern generated-asset usage; record license notes per
+    asset (skills/media pipelines require it)
+  - cost awareness: generation is metered; no speculative batches
+  - never embed provider names or keys in project source — resolve at
+    pipeline runtime from this file + env

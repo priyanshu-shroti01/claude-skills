@@ -1,0 +1,87 @@
+# Claude OS — Permission Levels
+# Authoritative definition of the L0-L5 autonomy model.
+# Digest for agents: .claude/rules/permission-rules.md
+# Enforcement: agent charters (ceilings), CLAUDE_OS_MAX_AUTONOMY env cap,
+# .claude/settings.json + hooks (mechanical backstop), human approval (L4/L5).
+
+levels:
+  0:
+    name: read-only
+    grants:
+      - inspect files, repos, rendered pages
+      - run read-only analysis/measurement tooling
+    denied: [any mutation]
+  1:
+    name: modify-project-files
+    grants:
+      - create/edit files within the project working tree
+    denied: [running builds, commits, anything outside the project tree]
+  2:
+    name: run-tests-builds
+    grants:
+      - everything in L1
+      - run tests, builds, local dev servers, local browsers
+    denied: [commits, network mutations, deployments]
+  3:
+    name: commits-branches
+    grants:
+      - everything in L2
+      - create branches, commit, push to non-protected branches
+    denied:
+      - pushes to protected branches (main, development)
+      - force-pushes anywhere shared
+      - deployments
+  4:
+    name: staging-deployment
+    approval: human-required-per-execution
+    grants:
+      - everything in L3
+      - deploy to staging environments
+  5:
+    name: production-deployment
+    approval: human-required-per-execution
+    grants:
+      - everything in L4
+      - deploy to production
+
+resolution:
+  # Effective permission = min() of all applicable caps.
+  effective_level: "min(agent_ceiling, CLAUDE_OS_MAX_AUTONOMY, task_grant)"
+  default_max_autonomy: 3
+  notes:
+    - L4/L5 approval is required AT EXECUTION TIME, every time, regardless
+      of ceilings or prior approvals.
+    - Approval is per-context; it does not carry between actions or days.
+    - Sensitive actions (approval-required.yaml) need approval at ANY level.
+
+agent_ceilings:
+  # Mirrors AGENTS.md; verify.sh cross-checks the two.
+  commander: 3
+  skill-router: 0
+  product-director: 1
+  design-director: 1
+  ux-researcher: 0
+  ux-designer: 1
+  visual-designer: 1
+  frontend-architect: 1
+  frontend-engineer: 3
+  backend-architect: 1
+  backend-engineer: 3
+  motion-director: 1
+  3d-director: 2
+  exploded-view-director: 2
+  media-director: 2
+  research-agent: 0
+  competitor-agent: 0
+  seo-agent: 2
+  accessibility-agent: 2
+  security-agent: 2
+  code-reviewer: 0
+  qa-agent: 2
+  visual-qa-agent: 2
+  performance-agent: 2
+  anti-slop-agent: 0
+  production-agent: 4
+  growth-agent: 0
+  lead-scout: 0
+  learning-agent: 3
