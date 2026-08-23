@@ -19,7 +19,7 @@ exactly one per need. Re-evaluate when a listed project changes character
 | Design skills breadth | Impeccable · Claude Design Skills (freshtechbro) · Owl-Listener designer-skills | **Impeccable** (canonical, maintained, Apache-2.0). The collections are *evaluation* — audit and cherry-pick individual skills at most; installing 60+ community skill prompts wholesale violates the routing principle and the security bar. |
 | Motion tooling | CSS · Motion/Motion Primitives · **GSAP** | Escalation ladder, not competition: CSS first → Motion for component motion → GSAP (now free) for timeline-heavy narrative. motion-director picks per need. |
 | SEO capability | **internal technical-seo + geo** · Claude SEO (AgriciDaniel) | **Internal skills are the baseline** (auditable, ours). Claude SEO is *evaluation*: 25 sub-skills + 18 sub-agents is capability-rich but single-maintainer and prompt-heavy — audit before any adoption, and adopt sub-skills selectively if at all. |
-| Scroll-driven 3D/video | **r3f-scenes (R3F/drei)** · Scroll World | Different tools: R3F = real interactive 3D (product views, exploded views). Scroll World = pre-rendered video scrub pages (paid generation services). Router picks by whether the experience needs *interaction* (R3F) or *cinematics* (Scroll World, optional). |
+| Scroll-driven 3D/video | **r3f-scenes (R3F/drei)** · **lets-scroll** · Scroll World | Two rulings (2026-08-23). Interaction vs cinematics: R3F = real interactive 3D (product views, exploded views); pre-rendered scroll-scrubbed video = cinematics. Within cinematics: **lets-scroll is primary** — same concept as Scroll World but more mature (seam frame-locking method, manual asset path, native 9:16 mobile chain, cost approval before spend). Scroll World demoted to *evaluation* (redundant); revisit only if lets-scroll stalls. Never install both. |
 | Image generation | provider abstraction (**config/providers**) · claude-image-gen | The abstraction is the architecture; claude-image-gen is one *evaluation-status* implementation of it. Never let a tool choice leak provider names into project code. |
 
 ## Core / optional / redundant / not-simultaneous
@@ -29,12 +29,15 @@ exactly one per need. Re-evaluate when a listed project changes character
   Impeccable, shadcn/ui, Playwright MCP, Lighthouse, internal skills
   (all 27), OWASP-as-reference.
 - **Optional**: Figma MCP, React Bits, Motion Primitives, GSAP, R3F+drei,
-  Scroll World, media providers.
+  lets-scroll, media providers.
 - **Evaluation (not installed)**: Ruflo, gstack, agent-browser,
-  Claude SEO, Claude Design Skills, claude-image-gen, omni-skill-claude.
+  Claude SEO, Claude Design Skills, claude-image-gen, omni-skill-claude,
+  Scroll World (superseded by lets-scroll).
 - **Redundant (deliberately not adopted)**: community anti-slop repos
   (internal skill covers it), gstack role system (agent roster covers
-  it), second browser harness, second memory system.
+  it), second browser harness, second memory system, Scroll World
+  (lets-scroll covers it).
 - **Never simultaneously**: Playwright MCP + agent-browser as defaults ·
   claude-mem + a second memory store · internal workflows + Ruflo
-  orchestration · two design systems in one project.
+  orchestration · two design systems in one project · lets-scroll +
+  Scroll World.

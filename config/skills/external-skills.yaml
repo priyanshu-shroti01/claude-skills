@@ -261,18 +261,44 @@ registry:
       with Webflow; keep proprietary notices.
     maintenance: active (Webflow)
 
-  scroll-world:
+  lets-scroll:
     status: optional
+    url: https://github.com/AIwithhassan/lets-scroll
+    license: MIT
+    version_pin: "rolling (plugin.json v0.8.0)"
+    install: "/plugin marketplace add AIwithhassan/lets-scroll; /plugin install lets-scroll@lets-scroll (or copy skills/lets-scroll into ~/.claude/skills/)"
+    verify: "/lets-scroll skill available"
+    purpose: >
+      scroll-scrubbed cinematic "fly through the world" landing pages —
+      the PRIMARY scroll-cinematic skill (supersedes scroll-world; see
+      docs/architecture/skill-overlap.md)
+    security_notes: >
+      Single SKILL.md + references (scrub engine, prompt templates,
+      pipeline scripts, knockout.py) — no installer, no hooks. Generation
+      costs real money: Monid pay-per-clip USD by default (N=6 1080p
+      chain ≈ $27) with Higgsfield credits as fallback; the skill states
+      the estimated total and gets approval before any spend — hold it to
+      that. Requires ffmpeg; a manual asset path needs no AI CLIs at all.
+      Both CLIs authenticate via their own login flows — no keys in this
+      repo. No tagged releases; repo owner (AIwithhassan) differs from
+      the plugin author (cyw) — re-verify provenance on update.
+    maintenance: active (verified 2026-08-23; last push 2026-08-15)
+
+  scroll-world:
+    status: evaluation
     url: https://github.com/oso95/scroll-world
     license: MIT
     version_pin: rolling
-    install: "/plugin marketplace add oso95/scroll-world (evaluate cost model first)"
+    install: "DO NOT INSTALL by default — superseded by lets-scroll (skill-overlap.md ruling)"
     verify: n/a until adopted
-    purpose: scroll-scrubbed video fly-through landing pages
+    purpose: (superseded) scroll-scrubbed video fly-through landing pages
     security_notes: >
       NOT an R3F library — generates scroll-scrubbed AI video pages.
       Requires paid third-party generation services (per-clip billing) +
       ffmpeg. Young project (2026-07). Name collides with unrelated repos.
+      Superseded 2026-08-23 by lets-scroll (same concept, more mature:
+      seam frame-locking, manual asset path, native mobile chain).
+      Revisit only if lets-scroll stalls.
     maintenance: young, active-ish
 
   # ── Media generation ─────────────────────────────────────────────

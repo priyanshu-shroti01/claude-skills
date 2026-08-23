@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- External skill `lets-scroll` ([AIwithhassan/lets-scroll](https://github.com/AIwithhassan/lets-scroll),
+  MIT, optional) — scroll-scrubbed cinematic "fly through the world" landing
+  pages. Registered in `config/skills/external-skills.yaml` and
+  `docs/dependencies.md`, referenced from `SYSTEM_MANIFEST.yaml` (`three_d`),
+  routable via the skill-router.
+
+### Changed
+
+- Scroll World (oso95/scroll-world) demoted from *optional* to *evaluation* —
+  superseded by lets-scroll (same concept, more mature). Overlap ruling
+  updated in `docs/architecture/skill-overlap.md`.
+
 ## [0.1.0] - 2026-08-21
 
 ### Added

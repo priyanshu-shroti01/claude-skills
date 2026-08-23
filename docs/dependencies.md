@@ -28,7 +28,8 @@ install; reason + alternative recorded).
 | react-three-fiber 9.7.0 | [pmndrs/react-three-fiber](https://github.com/pmndrs/react-three-fiber) | MIT | optional | per-project npm | keep notice |
 | drei 10.7.8 | [pmndrs/drei](https://github.com/pmndrs/drei) | MIT | optional | per-project npm | keep notice |
 | GSAP 3.x | [gsap.com](https://gsap.com) | GSAP Standard (custom, free) | optional | per-project npm | keep proprietary notices; no competing no-code animation tools |
-| Scroll World | [oso95/scroll-world](https://github.com/oso95/scroll-world) | MIT | optional | plugin (paid gen services) | keep notice |
+| lets-scroll (plugin v0.8.0) | [AIwithhassan/lets-scroll](https://github.com/AIwithhassan/lets-scroll) | MIT | optional | plugin / skill copy-in (paid gen services: Monid per-clip USD, Higgsfield credits) | keep notice |
+| Scroll World | [oso95/scroll-world](https://github.com/oso95/scroll-world) | MIT | evaluation (superseded by lets-scroll) | none | n/a |
 | Claude SEO v2.2.4 | [AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo) | MIT | evaluation | plugin (after audit) | keep notice |
 | Claude Design Skills | [freshtechbro/claudedesignskills](https://github.com/freshtechbro/claudedesignskills) | MIT | evaluation | plugin (after audit) | keep notice |
 | claude-image-gen | [guinacio/claude-image-gen](https://github.com/guinacio/claude-image-gen) | MIT | evaluation | plugin/MCP (after audit) | keep notice |
