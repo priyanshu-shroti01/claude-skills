@@ -84,6 +84,7 @@ three_d:
   drei: { status: optional, source: external, ref: drei }
   exploded_views: { status: optional, source: internal, path: skills/3d/exploded-views }
   gsap: { status: optional, source: external, ref: gsap }
+  lets_scroll: { status: optional, source: external, ref: lets-scroll, note: scroll-scrubbed cinematic landings }
 
 growth:
   growth_analysis: { status: optional, source: internal, path: skills/growth/growth-analysis }

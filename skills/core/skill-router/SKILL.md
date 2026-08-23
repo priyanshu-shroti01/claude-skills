@@ -31,6 +31,7 @@ require?"** Load the minimum. Name what might come later. Exclude the rest.
 | Website shipping publicly | technical-seo, geo, accessibility (agent), production-readiness |
 | Animation/motion emphasis | motion-director |
 | 3D / product visualization | r3f-scenes; exploded-views if explosion; 3d-director |
+| Scroll-cinematic "fly-through" landing (pre-rendered video) | lets-scroll (external, optional — paid generation, budget approved first); r3f-scenes instead when real-time interaction is needed |
 | Imagery/video assets missing | image-generation / video-generation, media-director |
 | API / server / database | api-standards, data-safety, backend-architect+engineer |
 | Auth, payments, uploads, user data | secure-coding, secrets-hygiene, security-agent (mandatory) |
