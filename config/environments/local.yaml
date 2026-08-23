@@ -1,0 +1,18 @@
+# Environment profile: local development machine (laptop/workstation)
+profile: local
+description: interactive development; human present
+
+autonomy:
+  max_level: 3            # CLAUDE_OS_MAX_AUTONOMY may lower, never raise
+  interactive: true
+
+features:
+  media_generation: per-env      # on if provider configured in .env
+  three_d: per-project
+  continuous_operation: off      # no scheduled runs on laptops by default
+  lead_scout: off
+
+tooling:
+  browsers: local (playwright-installed)
+  claude_mem: on
+  graphify: on

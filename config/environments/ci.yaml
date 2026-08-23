@@ -1,0 +1,22 @@
+# Environment profile: CI / ephemeral runners
+profile: ci
+description: stateless validation runs; no persistent memory or deploy rights
+
+autonomy:
+  max_level: 2            # tests/builds only — CI never commits or deploys
+  interactive: false
+
+features:
+  media_generation: off
+  three_d: build-only
+  continuous_operation: off
+  lead_scout: off
+
+tooling:
+  browsers: headless
+  claude_mem: off          # ephemeral runners keep no memory
+  graphify: on             # graph generation is per-checkout, allowed
+
+checks:                    # what CI runs (tests/run-all.sh covers these)
+  - scripts/verify.sh
+  - tests/run-all.sh

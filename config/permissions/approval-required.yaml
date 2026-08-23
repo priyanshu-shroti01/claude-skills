@@ -1,0 +1,44 @@
+# Claude OS — Sensitive Actions Requiring Explicit Human Approval
+# These require approval REGARDLESS of permission level or autonomy cap.
+# Agents encountering one of these: stop, explain, ask. Approval is
+# per-action and per-context — it never carries forward.
+
+always_require_approval:
+  deployment:
+    - production deployment (L5)
+    - staging deployment (L4)
+    - changing auto_deploy_* feature flags
+  data:
+    - deleting databases or tables
+    - destructive migrations (drops, narrowing, mass update/delete)
+    - hard deletion of user data
+    - restoring from backup (overwrites current state)
+  infrastructure:
+    - server-wide configuration changes
+    - any sudo/root operation
+    - firewall changes
+    - DNS changes
+    - TLS/certificate changes
+  secrets:
+    - reading secret values (beyond confirming presence by name)
+    - writing or rotating credentials
+    - changing secret storage configuration
+  outreach:
+    - mass outreach of any kind (email, social, messaging)
+    - any automated contact with individuals
+    - publishing content to external platforms on the human's behalf
+  irreversible:
+    - git history rewrites on shared branches
+    - force-pushes to shared branches
+    - deleting repositories, branches with unmerged work, or backups
+    - any action the agent cannot undo with a follow-up action
+  system:
+    - modifying SECURITY.md, permission configs, hooks, or agent
+      permission ceilings
+    - weakening any quality gate definition
+
+approval_mechanics:
+  - "request must state: the action, the target, why, the blast radius,
+    and the rollback path (or 'none - irreversible')"
+  - "silence is not consent; proceed only on explicit confirmation"
+  - "approvals are logged in the project/task ledger"
