@@ -1,0 +1,77 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "claude-os",
+  "version": "0.2.0",
+  "description": "Claude OS and its vetted external pack. Every third-party entry here has been cloned, licence-read and executable-audited, and carries a ruling in docs/architecture/skill-overlap.md. Nothing at evaluation or blocked status is listed.",
+  "owner": {
+    "name": "priyanshu-shroti01",
+    "url": "https://github.com/priyanshu-shroti01"
+  },
+  "plugins": [
+    {
+      "name": "claude-os",
+      "displayName": "Claude OS",
+      "source": "./",
+      "description": "The operating system itself: 29 specialist agents, 27 skills, 8 commands. Start here — the rest of this marketplace is optional capability on top.",
+      "version": "0.2.0",
+      "license": "MIT",
+      "category": "orchestration",
+      "keywords": ["agents", "workflows", "design", "engineering", "quality-gates"]
+    },
+    {
+      "name": "no-ai-slop",
+      "displayName": "No AI Slop (prose gate)",
+      "source": { "source": "github", "repo": "petergyang/no-ai-slop" },
+      "description": "20+ named AI writing patterns, with edit and detect modes. The prose half of the anti-slop gate — Claude OS's own anti-slop skill judges the render, this judges the copy. Vetted 2026-09-05: MIT, prompt-only, no hooks.",
+      "author": { "name": "Peter Yang", "url": "https://creatoreconomy.so" },
+      "homepage": "https://github.com/petergyang/no-ai-slop",
+      "license": "MIT",
+      "category": "writing",
+      "keywords": ["writing", "editing", "anti-slop", "voice"]
+    },
+    {
+      "name": "superseo",
+      "displayName": "SuperSEO Skills",
+      "source": { "source": "github", "repo": "inhouseseo/superseo-skills" },
+      "description": "11 SEO execution skills (briefs, drafting, semantic gap, clusters, snippets, E-E-A-T, link strategy). Sits ON TOP of Claude OS's technical-seo + geo, which remain the gate. Vetted 2026-09-05: Apache-2.0, prompt-only, zero executables, no API keys. Vendor-authored — treat methodology as opinion.",
+      "author": { "name": "InhouseSEO", "url": "https://inhouseseo.ai" },
+      "homepage": "https://github.com/inhouseseo/superseo-skills",
+      "license": "Apache-2.0",
+      "category": "seo",
+      "keywords": ["seo", "content", "eeat", "semantic-seo", "linkbuilding"]
+    },
+    {
+      "name": "mattpocock-selected",
+      "displayName": "Matt Pocock skills (Claude OS selection)",
+      "source": { "source": "github", "repo": "mattpocock/skills" },
+      "strict": false,
+      "skills": [
+        "./skills/engineering/diagnosing-bugs",
+        "./skills/engineering/resolving-merge-conflicts",
+        "./skills/engineering/domain-modeling",
+        "./skills/engineering/to-spec",
+        "./skills/engineering/to-tickets",
+        "./skills/productivity/grill-me",
+        "./skills/productivity/grilling",
+        "./skills/productivity/teach",
+        "./skills/productivity/writing-for-agents"
+      ],
+      "description": "A deliberate 9-skill subset of Matt Pocock's 25. Excluded on purpose: code-review, tdd, research, implement, prototype, triage, codebase-design (duplicated by Claude OS agents + Superpowers) and git-guardrails (a PreToolUse hook that would stack on pre-tool-guard.sh). Install the upstream mattpocock marketplace instead if you want all 25.",
+      "author": { "name": "Matt Pocock", "url": "https://www.aihero.dev" },
+      "homepage": "https://github.com/mattpocock/skills",
+      "license": "MIT",
+      "category": "engineering",
+      "keywords": ["debugging", "domain-modeling", "specs", "merge-conflicts"]
+    },
+    {
+      "name": "lets-scroll",
+      "displayName": "Let's Scroll (scroll cinematics)",
+      "source": { "source": "github", "repo": "AIwithhassan/lets-scroll" },
+      "description": "Scroll-scrubbed cinematic landing pages. COSTS REAL MONEY — pay-per-clip video generation; the skill must state the estimate and get approval before any spend. Use r3f-scenes instead when you need real interactive 3D.",
+      "homepage": "https://github.com/AIwithhassan/lets-scroll",
+      "license": "MIT",
+      "category": "3d",
+      "keywords": ["scroll", "cinematic", "landing-page", "video"]
+    }
+  ]
+}

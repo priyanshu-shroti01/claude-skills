@@ -32,7 +32,13 @@ require?"** Load the minimum. Name what might come later. Exclude the rest.
 | Animation/motion emphasis | motion-director |
 | 3D / product visualization | r3f-scenes; exploded-views if explosion; 3d-director |
 | Scroll-cinematic "fly-through" landing (pre-rendered video) | lets-scroll (external, optional — paid generation, budget approved first); r3f-scenes instead when real-time interaction is needed |
+| 3D hero / shader raw material needed | threeui (external, optional — Community subset only) *through* r3f-scenes' rules |
+| Visual direction for a 3D/cinematic brief | references/design/inspiration-sources.md (look, never copy) |
 | Imagery/video assets missing | image-generation / video-generation, media-director |
+| Any prose shipping to users (copy, docs, articles) | no-ai-slop (external, required — prose gate; pairs with the visual anti-slop gate) |
+| SEO *execution* — briefs, drafting, clusters, snippets, links | superseo-skills (external, optional); internal technical-seo + geo remain the gate |
+| Debugging, merge conflicts, domain modelling, spec/ticket breakdown | mattpocock-skills (external, optional — cherry-picked only) |
+| A capability the OS does not have | find-skills (external, required) — **discovery only**; adoption goes through SECURITY.md §4 before anything is installed |
 | API / server / database | api-standards, data-safety, backend-architect+engineer |
 | Auth, payments, uploads, user data | secure-coding, secrets-hygiene, security-agent (mandatory) |
 | Any implementation | code-reviewer (gate), functional-qa |

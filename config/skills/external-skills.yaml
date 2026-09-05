@@ -57,6 +57,30 @@ registry:
     security_notes: reputable author (obra); plugin-marketplace distribution
     maintenance: active (v6.3.0 released 2026-08-12)
 
+  skills-cli:
+    status: required
+    url: https://github.com/vercel-labs/skills
+    license: MIT
+    version_pin: "1.5.23"
+    install: "npx -y skills@1.5.23 add vercel-labs/skills --skill find-skills --agent claude-code"
+    verify: "npx skills --version; find-skills skill available"
+    purpose: >
+      the skills package manager (`npx skills find|add|update`) plus the
+      find-skills discovery skill — how the OS discovers new capabilities
+      in the open ecosystem (skills.sh)
+    security_notes: >
+      Official Vercel Inc., MIT, no hooks, no installer of its own — but
+      it is an INSTALL VECTOR: find-skills recommends third-party skills
+      and offers to run `npx skills add ... -g -y`. HARD RULE: discovery
+      only. Anything it surfaces goes through SECURITY.md §4 (canonical
+      source → license → maintenance → read what executes → pin → record
+      here + docs/dependencies.md) BEFORE it is installed. Never let an
+      agent run `skills add` unattended; never `-g -y` from a router
+      decision. The skill's own quality heuristics (install counts,
+      stars) are popularity, not an audit — they do not substitute for
+      ours.
+    maintenance: active (v1.5.23, npm 2026-08-19; verified 2026-09-05)
+
   anthropic-skills:
     status: required
     url: https://github.com/anthropics/skills
@@ -76,9 +100,20 @@ registry:
     version_pin: rolling
     install: "npx skills add vercel-labs/agent-skills (or copy selected skills)"
     verify: "react-best-practices + web-design-guidelines skills present"
-    purpose: react-best-practices, web-design-guidelines, composition-patterns
-    security_notes: official Vercel Labs; low risk
-    maintenance: active
+    purpose: >
+      8 Vercel Engineering skills. Adopted: react-best-practices,
+      web-design-guidelines, vercel-composition-patterns,
+      react-view-transitions, writing-guidelines, vercel-optimize.
+      Not adopted by default: deploy-to-vercel and vercel-cli-with-tokens
+      (L4/L5 deployment surface — deployment-gates owns that path).
+    security_notes: >
+      Official Vercel Labs; prose/reference skills, no hooks. NOTE the
+      two deployment skills carry real blast radius: vercel-cli-with-tokens
+      handles deploy tokens and deploy-to-vercel ships to an environment.
+      Both are approval-gated by config/permissions/approval-required.yaml
+      like any other deploy — never route them below L4.
+      Distinct repo from vercel-labs/skills (the CLI) — see skills-cli.
+    maintenance: active (verified 2026-09-05)
 
   impeccable:
     status: required
@@ -159,7 +194,115 @@ registry:
       internal design skills — adopt selectively, not wholesale.
     maintenance: active (community, individual)
 
+  threeui:
+    status: optional
+    url: https://github.com/MengTo/threeui
+    license: "MIT (Community code + ThreeUI-authored imagery); bundled fonts SIL OFL 1.1; bundled three.js MIT"
+    version_pin: "@designcodeio/threeui 1.2.0"
+    install: "per project: npm i @designcodeio/threeui@1.2.0 (or copy a Community component's source from threeui.com)"
+    verify: component renders in project
+    purpose: >
+      procedural Three.js hero components, shaders and landing templates —
+      raw material for r3f-scenes / 3d-director, in the same role
+      React Bits plays for 2D (garnish, never a second design system)
+    security_notes: >
+      LICENSE SPLIT — read before shipping. MIT covers ONLY the Community
+      (login-free) subset: application code, Community component code and
+      ThreeUI-authored Community imagery. NOT MIT: catalog thumbnails and
+      preview videos served from threeui.com (loaded remotely, never
+      redistributed — do not copy them into a project), and Pro/Beta
+      component source (paid, entitlement-checked, deliberately not on
+      npm). ThreeUI's MCP server and skills are Pro-tier only — this
+      entry covers the open component catalog, nothing else; do not
+      register a Pro MCP without a paid seat and a fresh vetting pass.
+      Bundled fonts are SIL OFL 1.1 (keep the notices); SF Pro is stripped
+      from the public sync — don't reintroduce it. Components pull runtime
+      files and some CDN libraries at render time; self-host what ships to
+      production (SECURITY.md — no unpinned third-party origins in a
+      client bundle) and keep them inside the project CSP.
+      Two pinned three.js majors (0.128 + 0.165) live side by side in the
+      package — check which one a copied component targets against the
+      project's own three version before importing.
+    maintenance: active (last push 2026-09-01; single maintainer, Meng To / Design+Code)
+
+  awwwards-threejs:
+    status: required
+    url: https://www.awwwards.com/websites/three-js/
+    license: "editorial gallery — each listed site is its own rights holder; no license grant of any kind"
+    version_pin: living gallery
+    install: "reference-only — LINK and look; never scrape, vendor, or copy"
+    verify: n/a (no install)
+    purpose: >
+      curated gallery of award-level Three.js / WebGL sites — the visual
+      reference source of record for 3D and scroll-cinematic briefs
+      (research-agent, design-director, 3d-director, motion-director);
+      catalogued with the rest in references/design/inspiration-sources.md
+    security_notes: >
+      NOT a dependency and NOT a source of code. Every site in the gallery
+      is somebody's copyrighted work. Rules: reference the TECHNIQUE
+      (scroll choreography, material behaviour, camera language, pacing),
+      never the composition, copy, or assets. Never scrape the gallery or
+      the sites it links; fetch a page only as an agent would view it, and
+      obey robots.txt. A screenshot may enter a research packet as cited
+      reference under fair use; it must never enter a shipped design.
+      Awwwards is also a popularity signal, not a quality gate — the
+      anti-slop gate and the project DESIGN.md still rule.
+    maintenance: active (editorial, continuously updated)
+
+  # ── Content / writing ─────────────────────────────────────────────
+  no-ai-slop:
+    status: required
+    url: https://github.com/petergyang/no-ai-slop
+    license: MIT
+    version_pin: "1.0.6"
+    install: "/plugin marketplace add petergyang/no-ai-slop; /plugin install no-ai-slop (or copy skills/no-ai-slop into ~/.claude/skills/)"
+    verify: "no-ai-slop skill available"
+    purpose: >
+      the PROSE anti-slop ruleset — 20+ named AI writing patterns with
+      edit and detect modes. Complements (does not overlap) the internal
+      visual anti-slop gate: ours judges rendered UI, this judges copy.
+      See docs/architecture/skill-overlap.md.
+    security_notes: >
+      Single SKILL.md + eval.md + an agent metadata yaml. No hooks, no
+      network calls, no installer; the one script (scripts/build_plugin.py)
+      only packages the repo and never runs at skill time. Ships a
+      .codex-plugin/plugin.json rather than .claude-plugin/ — Claude Code
+      auto-discovers skills/no-ai-slop/SKILL.md by default layout, so no
+      manifest is needed. Named individual maintainer (Peter Yang) —
+      bus-factor 1, but the surface is one prompt file you can read in
+      full before adopting an update.
+    maintenance: active (last push 2026-09-01; verified 2026-09-05)
+
   # ── Engineering / QA ─────────────────────────────────────────────
+  mattpocock-skills:
+    status: optional
+    url: https://github.com/mattpocock/skills
+    license: MIT
+    version_pin: "plugin 1.2.3"
+    install: "/plugin marketplace add mattpocock/skills; /plugin install mattpocock-skills@mattpocock — ADOPT SELECTIVELY (see purpose)"
+    verify: "chosen skills listed in /plugin"
+    purpose: >
+      25 published engineering + productivity skills. Adopted for the
+      capabilities our roster genuinely lacks: diagnosing-bugs,
+      resolving-merge-conflicts, domain-modeling, to-spec, to-tickets,
+      grill-me / grilling (adversarial self-questioning), teach,
+      writing-for-agents. NOT adopted: code-review, research, implement,
+      prototype, tdd, triage, codebase-design — those duplicate our
+      code-reviewer agent, research-intelligence skill and Superpowers.
+    security_notes: >
+      MIT, very active, named maintainer. Mostly prose skills, but three
+      ship shell: git-guardrails-claude-code installs a PreToolUse hook
+      that BLOCKS git push/reset --hard/clean -f, and wizard +
+      diagnosing-bugs ship template scripts. Read every one before
+      enabling — a third-party hook in .claude/settings.json is exactly
+      what security-rules.md forbids adding autonomously; the git-guardrails
+      hook also overlaps our own .claude/hooks/pre-tool-guard.sh and must
+      not be stacked on top of it. Installing the plugin wholesale pulls
+      all 25 skills and violates the routing principle — cherry-pick the
+      list above. skills/in-progress and skills/deprecated are explicitly
+      unstable: never adopt from them.
+    maintenance: active (last push 2026-09-04; 1000+ merged PRs)
+
   playwright-mcp:
     status: required
     url: https://github.com/microsoft/playwright-mcp
@@ -210,18 +353,57 @@ registry:
     maintenance: active
 
   # ── SEO ───────────────────────────────────────────────────────────
+  superseo-skills:
+    status: optional
+    url: https://github.com/inhouseseo/superseo-skills
+    license: Apache-2.0
+    version_pin: "0.2.1"
+    install: "/plugin marketplace add inhouseseo/superseo-skills; /plugin install superseo@superseo-skills"
+    verify: "page-audit + write-content skills available"
+    purpose: >
+      11 execution-level SEO skills the internal baseline does not cover —
+      content-brief, write-content, improve-content, keyword-deep-dive,
+      semantic-gap-analysis, eeat-audit, topic-cluster-planning,
+      featured-snippet-optimizer, linkbuilding, expert-interview,
+      page-audit. The adopted external SEO layer on top of internal
+      technical-seo + geo (which remain the gate). Supersedes claude-seo —
+      see docs/architecture/skill-overlap.md.
+    security_notes: >
+      Prompt-only: 11 SKILL.md files + reference markdown, zero
+      executables, no hooks, no package manifest, no API keys, no paid
+      tier required (verified by clone + tree inspection 2026-09-05).
+      Ships its own SECURITY.md and disclosure address. At skill time the
+      agent only uses tools the user already granted (web search/fetch);
+      write-content may offer to persist business context to a file the
+      user names — that is the only write, and it asks first.
+      VENDOR BIAS: authored by InhouseSEO, who sell a paid SEO platform
+      the README markets. The skills work standalone, but treat their
+      methodology claims as vendor opinion, not established fact, and
+      never let a skill's recommendation become a reason to buy the
+      platform. YOUNG: v0.2.1, ~51 commits, ~305 stars — capable but not
+      battle-hardened; re-verify provenance on each update.
+      linkbuilding teaches acquisition tactics: guest posting and outreach
+      stay human-executed and approval-gated exactly like lead-research —
+      an agent never contacts anyone, and nothing here authorizes buying
+      links or building private blog networks.
+    maintenance: active (v0.2.1 released 2026-09-03; single org maintainer)
+
   claude-seo:
     status: evaluation
     url: https://github.com/AgriciDaniel/claude-seo
     license: MIT
     version_pin: "v2.2.4"
-    install: "EVALUATE FIRST - /plugin marketplace add AgriciDaniel/claude-seo"
+    install: "DO NOT INSTALL by default — superseded by superseo-skills (skill-overlap.md ruling)"
     verify: n/a until adopted
-    purpose: 25 SEO sub-skills + 18 sub-agents (technical, schema, GEO/AEO)
+    purpose: (superseded) 25 SEO sub-skills + 18 sub-agents (technical, schema, GEO/AEO)
     security_notes: >
-      Single-maintainer bus-factor; optional paid extensions (DataForSEO,
-      Firecrawl). Audit skill prompts before install. Internal
-      technical-seo + geo skills cover the baseline meanwhile.
+      Single-maintainer bus-factor; optional PAID extensions (DataForSEO,
+      Firecrawl) where superseo-skills needs no keys at all. 25 skills +
+      18 sub-agents is a far larger unaudited prompt surface than the
+      capability gap justifies. Superseded 2026-09-05 by superseo-skills
+      (Apache-2.0, prompt-only, zero executables, no paid dependency) as
+      the external SEO layer. Internal technical-seo + geo remain the
+      gate either way. Revisit only if superseo-skills stalls.
     maintenance: active (single maintainer)
 
   # ── 3D / Motion ──────────────────────────────────────────────────
