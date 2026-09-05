@@ -2,8 +2,11 @@
 
 Human-readable audit of every external dependency. Machine-consumed twin:
 `config/skills/external-skills.yaml` (installer + pins) — keep in sync.
-All facts verified **2026-08-21** against the linked sources (web
-research; canonical repos and registries fetched). Statuses:
+Facts verified **2026-08-21**, with the 2026-09-05 pack additions
+(skills CLI, no-ai-slop, superseo-skills, mattpocock-skills, ThreeUI,
+Awwwards) verified that day by **cloning each repo and reading its
+LICENSE, tree and every executable file** — not from README claims.
+Statuses:
 **required** (bootstrap installs) · **optional** (opt-in) ·
 **evaluation** (human evaluates before any install) · **blocked** (do not
 install; reason + alternative recorded).
@@ -16,7 +19,13 @@ install; reason + alternative recorded).
 | Graphify (PyPI `graphifyy` 0.9.48) | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Apache-2.0 | required | pip + `graphify install` | NOTICE preserved on redistribution |
 | Superpowers v6.3.0 | [obra/superpowers](https://github.com/obra/superpowers) | MIT | required | official plugin marketplace | keep copyright notice |
 | Anthropic skills | [anthropics/skills](https://github.com/anthropics/skills) | Apache-2.0 (most); doc skills source-available | required | plugin marketplace | per-skill; doc skills non-open — don't redistribute |
-| Vercel agent skills | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | MIT | required | skills CLI / copy-in | keep copyright notice |
+| Vercel agent skills (8 skills) | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | MIT | required | skills CLI / copy-in | keep copyright notice |
+| Skills CLI 1.5.23 + find-skills | [vercel-labs/skills](https://github.com/vercel-labs/skills) | MIT | required | `npx skills` + find-skills skill | keep copyright notice |
+| no-ai-slop 1.0.6 | [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop) | MIT | required | plugin / skill copy-in | keep copyright notice |
+| SuperSEO Skills 0.2.1 (11 skills) | [inhouseseo/superseo-skills](https://github.com/inhouseseo/superseo-skills) | Apache-2.0 | optional | plugin marketplace | NOTICE on redistribution |
+| Matt Pocock skills 1.2.3 (25 skills) | [mattpocock/skills](https://github.com/mattpocock/skills) | MIT | optional (**selective**) | plugin marketplace, cherry-picked | keep copyright notice |
+| ThreeUI 1.2.0 | [MengTo/threeui](https://github.com/MengTo/threeui) | **MIT (Community only) + SIL OFL fonts** | optional | npm / component copy-in | keep notices; fonts OFL; catalog media not redistributable |
+| Awwwards Three.js gallery | [awwwards.com](https://www.awwwards.com/websites/three-js/) | **no license grant — each site is its own rights holder** | required (reference-only) | linked, never copied | cite in research packets; never reuse compositions or assets |
 | Impeccable | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | Apache-2.0 | required | plugin marketplace | NOTICE on redistribution |
 | shadcn/ui + MCP | [shadcn-ui/ui](https://github.com/shadcn-ui/ui) | MIT | required | per-project CLI + MCP | keep notice in copied components |
 | Playwright MCP 0.0.79 | [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp) | Apache-2.0 | required | MCP (npx) | n/a (tool use) |
@@ -30,7 +39,7 @@ install; reason + alternative recorded).
 | GSAP 3.x | [gsap.com](https://gsap.com) | GSAP Standard (custom, free) | optional | per-project npm | keep proprietary notices; no competing no-code animation tools |
 | lets-scroll (plugin v0.8.0) | [AIwithhassan/lets-scroll](https://github.com/AIwithhassan/lets-scroll) | MIT | optional | plugin / skill copy-in (paid gen services: Monid per-clip USD, Higgsfield credits) | keep notice |
 | Scroll World | [oso95/scroll-world](https://github.com/oso95/scroll-world) | MIT | evaluation (superseded by lets-scroll) | none | n/a |
-| Claude SEO v2.2.4 | [AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo) | MIT | evaluation | plugin (after audit) | keep notice |
+| Claude SEO v2.2.4 | [AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo) | MIT | evaluation (superseded by SuperSEO) | none | n/a |
 | Claude Design Skills | [freshtechbro/claudedesignskills](https://github.com/freshtechbro/claudedesignskills) | MIT | evaluation | plugin (after audit) | keep notice |
 | claude-image-gen | [guinacio/claude-image-gen](https://github.com/guinacio/claude-image-gen) | MIT | evaluation | plugin/MCP (after audit) | keep notice |
 | omni-skill-claude | [xbill9/omni-skill-claude](https://github.com/xbill9/omni-skill-claude) | Apache-2.0 | evaluation (reference-only) | none | n/a |
@@ -69,6 +78,34 @@ ALTERNATIVE: skills/growth/lead-research — lawful public-business-data
   OSI; restrictions on building competing no-code animation tools.
 - **Figma MCP** is a proprietary hosted service, plan-gated, beta
   pricing subject to change.
+- **ThreeUI is a split licence.** MIT covers the Community subset only:
+  application code, Community component code, ThreeUI-authored Community
+  imagery. It does **not** cover the catalog thumbnails and preview videos
+  served from `threeui.com` (loaded remotely, never redistributed — don't
+  copy them into a project) or Pro/Beta component source (paid, entitlement
+  -checked, absent from npm). Bundled fonts are **SIL OFL 1.1** — keep the
+  notices. ThreeUI's MCP server and skills are **Pro-tier**; this record
+  covers the open component catalog and nothing else.
+- **The Awwwards gallery grants no licence at all.** It is an editorial
+  list of other people's copyrighted sites. Reference the *technique*;
+  never the composition, copy, or assets. Never scrape it or the sites
+  it links.
+- **SuperSEO Skills carries vendor bias, not a licence problem.**
+  Apache-2.0 and prompt-only, but authored by InhouseSEO, who sell an SEO
+  platform. The skills run standalone with no keys; treat their
+  methodology as vendor opinion. Its `linkbuilding` skill teaches
+  outreach — outreach stays human-executed and approval-gated, exactly
+  like `lead-research`.
+- **mattpocock/skills ships a PreToolUse hook.** `git-guardrails-claude-code`
+  installs a hook that blocks `git push`, `reset --hard`, `clean -f`.
+  Adding a third-party hook is precisely what `.claude/rules/security-rules.md`
+  forbids doing autonomously, and it overlaps our own
+  `.claude/hooks/pre-tool-guard.sh`. Adopt the prose skills; leave the
+  hook alone unless a human explicitly asks for it.
+- **The skills CLI is an install vector.** `find-skills` will happily
+  recommend and `npx skills add -g -y` any popular skill. Install counts
+  and stars are popularity, not an audit. Discovery is free; adoption
+  goes through the vetting protocol below.
 
 ## Vetting protocol for new dependencies
 

@@ -7,19 +7,60 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-05
+
+Claude OS becomes installable as a plugin, and the external registry grows
+from 26 to 32 vetted entries. Every new third-party entry was cloned and
+read — LICENSE, tree, and every executable file — not taken from its README.
+
 ### Added
 
-- External skill `lets-scroll` ([AIwithhassan/lets-scroll](https://github.com/AIwithhassan/lets-scroll),
-  MIT, optional) — scroll-scrubbed cinematic "fly through the world" landing
-  pages. Registered in `config/skills/external-skills.yaml` and
-  `docs/dependencies.md`, referenced from `SYSTEM_MANIFEST.yaml` (`three_d`),
-  routable via the skill-router.
+- **Plugin packaging.** `.claude-plugin/plugin.json` and
+  `.claude-plugin/marketplace.json` — the OS installs with
+  `/plugin marketplace add priyanshu-shroti01/claude-skills`, shipping 27
+  skills, 29 agents and 8 commands. The marketplace also carries the vetted
+  external members, so one `marketplace add` reaches all of them.
+  Hooks are deliberately **not** shipped through the plugin: a plugin that
+  silently installs a `PreToolUse` hook is what `security-rules.md` forbids.
+  They stay behind `scripts/bootstrap.sh`.
+- `skills-cli` ([vercel-labs/skills](https://github.com/vercel-labs/skills),
+  MIT, required) — the `npx skills` package manager and the `find-skills`
+  discovery skill. Registered as **discovery only**: everything it surfaces
+  clears SECURITY.md §4 before installation. Its install counts and stars
+  are popularity, not an audit.
+- `no-ai-slop` ([petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop),
+  MIT, required) — the prose slop gate: 20+ named AI writing patterns with
+  edit and detect modes. Closes a real gap; the internal anti-slop skill has
+  only ever scored rendered UI.
+- `superseo-skills` ([inhouseseo/superseo-skills](https://github.com/inhouseseo/superseo-skills),
+  Apache-2.0, optional) — 11 SEO execution skills. Prompt-only, zero
+  executables, no API keys, no paid tier (verified by clone).
+- `mattpocock-skills` ([mattpocock/skills](https://github.com/mattpocock/skills),
+  MIT, optional) — adopted as a **9-of-25 subset**, enforced by the
+  marketplace entry's `skills` list.
+- `threeui` ([MengTo/threeui](https://github.com/MengTo/threeui), optional) —
+  procedural Three.js components and shaders, per-component raw material for
+  `r3f-scenes`.
+- `awwwards-threejs` (reference-only, required) plus
+  `references/design/inspiration-sources.md` — how to use a visual reference
+  without copying it.
+- `docs/skills/pack.md` — the full pack catalogue and the adoption bar.
+- `scripts/install-pack.sh` — prints the install commands per tier; executes
+  only unambiguous shell installs, and only with `--run`.
 
 ### Changed
 
-- Scroll World (oso95/scroll-world) demoted from *optional* to *evaluation* —
-  superseded by lets-scroll (same concept, more mature). Overlap ruling
-  updated in `docs/architecture/skill-overlap.md`.
+- `vercel-agent-skills` registry entry now names all 8 skills and marks
+  `deploy-to-vercel` / `vercel-cli-with-tokens` as L4/L5 deployment surface.
+- Skill-router routing table gained 7 rows (prose gate, SEO execution,
+  engineering extras, 3D raw material, visual reference, skill discovery).
+- `skill-overlap.md` gained 7 rulings and an "adopting anything the pack
+  surfaces" section. Prose slop vs visual slop is recorded as a **gap, not
+  an overlap** — both gates run.
+- Scroll World demoted from *optional* to *evaluation* — superseded by
+  lets-scroll (same concept, more mature).
+- Claude SEO (AgriciDaniel) demoted to *superseded* — superseo-skills covers
+  the same gap with a smaller, key-free, executable-free surface.
 
 ## [0.1.0] - 2026-08-21
 

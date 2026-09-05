@@ -1,0 +1,46 @@
+{
+  "name": "claude-os",
+  "displayName": "Claude OS",
+  "version": "0.2.0",
+  "description": "An AI engineering, design, product and growth operating system: 29 specialist agents, 27 skills and 8 commands, with permission ceilings, adversarial review and quality gates wired in.",
+  "author": {
+    "name": "priyanshu-shroti01",
+    "url": "https://github.com/priyanshu-shroti01"
+  },
+  "homepage": "https://github.com/priyanshu-shroti01/claude-skills",
+  "repository": "https://github.com/priyanshu-shroti01/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "design",
+    "frontend",
+    "backend",
+    "seo",
+    "security",
+    "qa",
+    "anti-slop",
+    "3d",
+    "workflows"
+  ],
+  "skills": [
+    "./skills/core",
+    "./skills/design",
+    "./skills/frontend",
+    "./skills/backend",
+    "./skills/research",
+    "./skills/security",
+    "./skills/qa",
+    "./skills/seo",
+    "./skills/media",
+    "./skills/3d",
+    "./skills/growth",
+    "./skills/production"
+  ],
+  "agents": "./.claude/agents",
+  "commands": "./.claude/commands",
+  "metadata": {
+    "hooksDeliberatelyOmitted": "The repo's hooks (.claude/hooks/pre-tool-guard.sh, session-start.sh) are NOT shipped through this plugin. A plugin that silently installs a PreToolUse hook is the thing security-rules.md forbids. Run scripts/bootstrap.sh to install them with your consent.",
+    "externalDependencies": "config/skills/external-skills.yaml",
+    "overlapRulings": "docs/architecture/skill-overlap.md"
+  }
+}

@@ -5,6 +5,10 @@ truth) and are symlinked into `.claude/skills/` by `scripts/install.sh`
 for discovery. External skills/plugins are governed by the registry
 (`config/skills/external-skills.yaml`) and `docs/dependencies.md`.
 
+The combined catalogue — 27 internal skills plus 32 registered external
+entries, with the status that decides whether each is installed — is
+[`pack.md`](pack.md).
+
 ## The library (27 internal skills)
 
 | Category | Skills |

@@ -7,7 +7,7 @@
 
 system:
   name: "Claude OS"
-  version: "0.1.0"            # keep in sync with VERSION
+  version: "0.2.0"            # keep in sync with VERSION
   description: >
     Reusable AI engineering, design, product and growth operating system
     for Claude Code. GitHub-first, reproducible, permission-controlled.
@@ -38,6 +38,7 @@ core:
   quality_pipeline: { status: required, source: internal, path: skills/core/quality-pipeline }
   claude_mem: { status: required, source: external, ref: claude-mem }
   knowledge_graph: { status: required, source: external, ref: graphify }
+  skill_discovery: { status: required, source: external, ref: skills-cli, note: "find-skills — discovery only; adoption via SECURITY.md §4" }
 
 design:
   frontend_design: { status: required, source: external, ref: anthropic-skills }
@@ -50,6 +51,10 @@ design:
   react_bits: { status: optional, source: external, ref: react-bits }
   motion_primitives: { status: optional, source: external, ref: motion-primitives }
   claude_design_skills: { status: evaluation, source: external, ref: claude-design-skills }
+  inspiration_sources: { status: required, source: external, ref: awwwards-threejs, method: reference-only }
+
+content:
+  no_ai_slop: { status: required, source: external, ref: no-ai-slop, note: "prose slop gate — pairs with visual anti-slop" }
 
 engineering:
   superpowers: { status: required, source: external, ref: superpowers }
@@ -57,6 +62,7 @@ engineering:
   code_review: { status: required, source: internal, path: agents/code-reviewer }
   frontend_standards: { status: required, source: internal, path: skills/frontend }
   backend_standards: { status: required, source: internal, path: skills/backend }
+  mattpocock_skills: { status: optional, source: external, ref: mattpocock-skills, note: "selective adoption — see skill-overlap.md" }
 
 testing:
   playwright_mcp: { status: required, source: external, ref: playwright-mcp }
@@ -72,7 +78,8 @@ security:
 seo:
   technical_seo: { status: required, source: internal, path: skills/seo/technical-seo }
   geo: { status: required, source: internal, path: skills/seo/geo }
-  claude_seo: { status: evaluation, source: external, ref: claude-seo }
+  superseo: { status: optional, source: external, ref: superseo-skills, note: "external SEO execution layer; internal skills remain the gate" }
+  claude_seo: { status: evaluation, source: external, ref: claude-seo, note: superseded-by-superseo }
 
 media:
   media_pipeline: { status: optional, source: internal, path: skills/media }
@@ -85,6 +92,7 @@ three_d:
   exploded_views: { status: optional, source: internal, path: skills/3d/exploded-views }
   gsap: { status: optional, source: external, ref: gsap }
   lets_scroll: { status: optional, source: external, ref: lets-scroll, note: scroll-scrubbed cinematic landings }
+  threeui: { status: optional, source: external, ref: threeui, note: "Community subset MIT only — per-component raw material" }
 
 growth:
   growth_analysis: { status: optional, source: internal, path: skills/growth/growth-analysis }

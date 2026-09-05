@@ -12,8 +12,21 @@ git clone https://github.com/priyanshu-shroti01/claude-skills.git claude-os
 cd claude-os
 scripts/bootstrap.sh        # idempotent; --dry-run to preview
 scripts/doctor.sh           # PASS/WARN/FAIL health report
+scripts/install-pack.sh     # what to install, per tier (prints; --run to execute)
 scripts/project-init.sh ~/work/my-site   # put any project on the OS
 ```
+
+Or install it as a plugin, from inside Claude Code:
+
+```
+/plugin marketplace add priyanshu-shroti01/claude-skills
+/plugin install claude-os@claude-os
+```
+
+The same marketplace carries the vetted external pack —
+`no-ai-slop`, `superseo`, `mattpocock-selected`, `lets-scroll`. The plugin
+deliberately ships **no hooks**: `scripts/bootstrap.sh` installs those, with
+your consent. See [docs/skills/pack.md](docs/skills/pack.md).
 
 Version: see [VERSION](VERSION) · Changes: [CHANGELOG.md](CHANGELOG.md) ·
 License: [MIT](LICENSE) (external deps carry their own — see
@@ -31,6 +44,8 @@ configs, installers, tests — is versioned here. No hidden local state.
 | Install on a new machine | [docs/installation/bootstrap.md](docs/installation/bootstrap.md) |
 | Meet the agents | [AGENTS.md](AGENTS.md) · [docs/agents/README.md](docs/agents/README.md) |
 | Browse the skills | [docs/skills/README.md](docs/skills/README.md) |
+| The full pack (internal + external) | [docs/skills/pack.md](docs/skills/pack.md) |
+| Visual reference sources | [references/design/inspiration-sources.md](references/design/inspiration-sources.md) |
 | Run a workflow | [docs/workflows/README.md](docs/workflows/README.md) |
 | Security model | [SECURITY.md](SECURITY.md) · [docs/security/README.md](docs/security/README.md) |
 | Media generation | [docs/media/README.md](docs/media/README.md) |
