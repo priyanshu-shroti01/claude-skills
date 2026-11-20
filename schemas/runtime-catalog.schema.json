@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/priyanshu-shroti01/claude-skills/schemas/runtime-catalog.schema.json",
+  "title": "Claude OS runtime skill catalog (format 1)",
+  "description": "Written by scripts/export-runtime-catalog.py. A consuming runtime pins the sha256 of the exact file bytes and re-verifies every rule here itself.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "source", "skills", "excluded"],
+  "properties": {
+    "format": { "const": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repo", "commit", "version", "exportedAt"],
+      "properties": {
+        "repo": { "type": "string", "minLength": 1 },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$" },
+        "exportedAt": { "type": "string", "minLength": 1 }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "description", "version", "category", "path", "license", "origin", "risk", "agents", "dependsOn", "triggers", "hasScripts", "sha256", "instructions"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$" },
+          "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "description": { "type": "string", "minLength": 1, "maxLength": 1024 },
+          "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$" },
+          "category": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$" },
+          "path": { "type": "string", "pattern": "^skills/[a-z0-9-]+/[a-z0-9-]+/SKILL\\.md$" },
+          "license": { "type": "string", "minLength": 1 },
+          "origin": { "const": "first-party" },
+          "risk": { "enum": ["low", "medium", "high"] },
+          "agents": { "type": "array", "items": { "type": "string" }, "maxItems": 40 },
+          "dependsOn": { "type": "array", "items": { "type": "string" }, "maxItems": 10 },
+          "triggers": { "type": "array", "items": { "type": "string", "maxLength": 60 }, "maxItems": 40 },
+          "hasScripts": { "type": "boolean" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "instructions": { "type": "string", "minLength": 200, "maxLength": 24000 }
+        }
+      }
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "reason"],
+        "properties": { "path": { "type": "string" }, "reason": { "type": "string" } }
+      }
+    }
+  }
+}

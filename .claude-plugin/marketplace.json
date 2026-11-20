@@ -12,7 +12,7 @@
       "name": "claude-os",
       "displayName": "Claude OS",
       "source": "./",
-      "description": "The operating system itself: 29 specialist agents, 36 skills, 8 commands. Start here — the rest of this marketplace is optional capability on top.",
+      "description": "The operating system itself: 29 specialist agents, 42 skills, 8 commands. Start here — the rest of this marketplace is optional capability on top.",
       "version": "0.2.0",
       "license": "MIT",
       "category": "orchestration",

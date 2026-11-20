@@ -19,7 +19,7 @@ for dir in skills/*/*/; do
     MENTIONED=$((MENTIONED+1))
   fi
 done
-[ "$TOTAL" -eq 36 ] || { echo "expected 36 skills on disk, got $TOTAL"; exit 1; }
+[ "$TOTAL" -eq 42 ] || { echo "expected 42 skills on disk, got $TOTAL"; exit 1; }
 [ "$MENTIONED" -ge $((TOTAL * 2 / 3)) ] || {
   echo "router references only $MENTIONED/$TOTAL skills — routing table stale"; exit 1; }
 

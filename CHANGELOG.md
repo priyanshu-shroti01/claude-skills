@@ -7,7 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-21
+
 ### Added
+- **Runtime catalog export.** `scripts/export-runtime-catalog.py` turns the
+  first-party skills into one pinned, platform-neutral catalog
+  (`dist/runtime-catalog/catalog.json` + `.sha256`, format in
+  `schemas/runtime-catalog.schema.json`, contract in
+  `docs/architecture/runtime-catalog.md`). Runtime metadata (risk, triggers,
+  dependencies) lives in `config/skills/runtime-export.yaml`; `SKILL.md` is
+  unchanged. Scripts, hooks, commands and every `external/` skill are never
+  exported. Tested by `tests/skills/test_runtime_catalog.sh`.
+- Six internal skills (36 → 42) and four categories, for running a company
+  rather than only building software:
+  - executive: `objective-planning`
+  - infrastructure: `linux-server-diagnostics`
+  - operations: `incident-response`
+  - finance: `finance-review`
+  - support: `ticket-triage`
+  - security: `security-assessment`
+  The skill-router's routing table names them.
 - Nine internal skills (27 → 36), and a new `support` category:
   - design: `cinematic-product-design`, `design-system`
   - backend: `whmcs-operations`, `payment-gateways`, `php-module-packaging`
@@ -19,6 +38,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Each keeps its upstream licence; not covered by MIT, not in the plugin.
   Indexed in `external/README.md`.
 - README hero and section illustrations (`docs/assets/`).
+
+### Changed
+- The plugin now lists 42 skills in 17 category directories.
 
 ## [0.2.0] - 2026-09-05
 

@@ -1,0 +1,77 @@
+# Runtime export metadata for first-party skills.
+#
+# Read by scripts/export-runtime-catalog.py, which turns skills/<cat>/<name>/SKILL.md
+# into one platform-neutral catalog other runtimes can pin (format: docs/architecture/runtime-catalog.md).
+# SKILL.md keeps the Agent Skills shape (name + description) so Claude Code is
+# unaffected; what a runtime needs beyond that lives here, reviewed in one place.
+#
+# Every first-party skill must have an entry (the export fails otherwise).
+#   risk:       low | medium | high - the risk of the work the skill guides, not of reading it.
+#               A runtime may require more scrutiny for high; it never lowers its own gates for low.
+#   triggers:   short phrases that mean "this task needs this skill" (lower case).
+#   depends_on: other first-party skills that must be loaded with this one.
+#   runtime:    false keeps a skill out of the export (Claude Code only).
+#
+# Third-party skills in external/ are never exported as loadable; they are
+# listed in the catalog's `excluded` section with the reason.
+
+skills:
+  # core
+  skill-router:          { risk: low, runtime: false, triggers: [] }
+  quality-pipeline:      { risk: low, triggers: [quality gate, review gate, release gate] }
+  memory:                { risk: low, triggers: [remember, memory, lesson learned] }
+  graph-knowledge:       { risk: low, runtime: false, triggers: [] }
+  # executive
+  objective-planning:    { risk: low, triggers: [objective, plan, delegate, delegation, decompose, roadmap, priorities, escalate, report to the founder, performance review] }
+  # design
+  design-direction:      { risk: low, triggers: [design direction, visual direction, brand look] }
+  anti-slop:             { risk: low, triggers: [generic design, ai slop, looks templated] }
+  design-review:         { risk: low, triggers: [design review, ui review] }
+  cinematic-product-design: { risk: low, triggers: [hero section, landing page design, product page design] }
+  design-system:         { risk: low, triggers: [design system, design tokens, component styles] }
+  # frontend
+  frontend-standards:    { risk: low, triggers: [frontend, react, next.js, component, page layout] }
+  component-quality:     { risk: low, triggers: [component, accessibility of a component] }
+  # backend
+  api-standards:         { risk: medium, triggers: [api, endpoint, route handler, rest] }
+  data-safety:           { risk: high, triggers: [migration, database change, delete data, backup before] }
+  whmcs-operations:      { risk: medium, triggers: [whmcs, billing system, hosting module, provisioning] }
+  payment-gateways:      { risk: high, triggers: [payment gateway, payment callback, razorpay, stripe, refund flow] }
+  php-module-packaging:  { risk: medium, triggers: [php module, ioncube, module release] }
+  # infrastructure
+  linux-server-diagnostics: { risk: medium, triggers: [server, vps, linux, load average, memory, swap, disk full, apache, nginx, php-fpm, mariadb, mysql, cloudlinux, service down, restart, backup, slow site, "503", "502"] }
+  # operations
+  incident-response:     { risk: medium, triggers: [incident, outage, down for, alert, compromise, postmortem, post-incident, log analysis] }
+  # finance
+  finance-review:        { risk: medium, triggers: [expense, expenses, budget, profit, sales, invoice, overdue, cost, afford, spend, spending, cash] }
+  # research
+  research-intelligence: { risk: low, triggers: [research, find out, investigate the market, sources] }
+  competitor-analysis:   { risk: low, triggers: [competitor, competitors, compare with, pricing comparison] }
+  # security
+  secure-coding:         { risk: medium, triggers: [secure coding, injection, xss, csrf, authentication code] }
+  secrets-hygiene:       { risk: medium, triggers: [secret, api key, credential, token rotation] }
+  webhook-security:      { risk: medium, triggers: [webhook, callback url, signature verification, public endpoint] }
+  security-assessment:   { risk: medium, triggers: [security audit, security review, vulnerability, vulnerabilities, access control, authorization review, dependency review, hardening, attack surface] }
+  # qa
+  functional-qa:         { risk: low, triggers: [test, qa, regression, verify the fix, acceptance] }
+  visual-qa:             { risk: low, triggers: [visual qa, screenshot check, layout broken] }
+  # seo
+  technical-seo:         { risk: low, triggers: [seo, search ranking, sitemap, robots.txt, core web vitals, indexing] }
+  geo:                   { risk: low, triggers: [ai search, generative engine, llms.txt, cited by ai] }
+  # media
+  image-generation:      { risk: medium, runtime: false, triggers: [] }
+  video-generation:      { risk: medium, runtime: false, triggers: [] }
+  # 3d
+  r3f-scenes:            { risk: low, triggers: [3d scene, three.js, react three fiber, avatar model] }
+  exploded-views:        { risk: low, runtime: false, triggers: [] }
+  # growth
+  growth-analysis:       { risk: low, triggers: [growth, conversion, funnel, traffic, signups] }
+  lead-research:         { risk: medium, triggers: [lead research, prospect list, find leads] }
+  launch-playbook:       { risk: medium, triggers: [launch, promotion, campaign, go to market, waitlist] }
+  # production
+  production-readiness:  { risk: medium, triggers: [production readiness, ready to ship, go live] }
+  deployment-gates:      { risk: high, triggers: [deploy, deployment, rollback, release to production, staging] }
+  # support
+  support-playbook:      { risk: low, triggers: [customer reply, reply to the customer, ticket reply, support reply, customer asked] }
+  cpanel-whm-guide:      { risk: low, triggers: [cpanel, whm, email account, addon domain, file manager, autossl, dns zone] }
+  ticket-triage:         { risk: low, triggers: [ticket, tickets, triage, support queue, customer message, classify, prioritise, prioritize, route] }

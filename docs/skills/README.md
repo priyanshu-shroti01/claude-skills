@@ -9,7 +9,7 @@ The combined catalogue — 27 internal skills plus 32 registered external
 entries, with the status that decides whether each is installed — is
 [`pack.md`](pack.md).
 
-## The library (36 internal skills)
+## The library (42 internal skills)
 
 | Category | Skills |
 |---|---|
@@ -18,14 +18,18 @@ entries, with the status that decides whether each is installed — is
 | frontend | frontend-standards · component-quality |
 | backend | api-standards · data-safety · whmcs-operations · payment-gateways · php-module-packaging |
 | research | research-intelligence · competitor-analysis |
-| security | secure-coding · secrets-hygiene · webhook-security |
+| security | secure-coding · secrets-hygiene · webhook-security · security-assessment |
 | qa | functional-qa · visual-qa |
 | seo | technical-seo · geo |
 | media | image-generation · video-generation |
 | 3d | r3f-scenes · exploded-views |
 | growth | growth-analysis · lead-research · launch-playbook |
 | production | production-readiness · deployment-gates |
-| support | support-playbook · cpanel-whm-guide |
+| support | support-playbook · cpanel-whm-guide · ticket-triage |
+| executive | objective-planning |
+| infrastructure | linux-server-diagnostics |
+| operations | incident-response |
+| finance | finance-review |
 
 ## External library (236 third-party skills)
 
