@@ -48,7 +48,7 @@ SUSPICIOUS = [
     (r"\b(bypass|skip|override|disable|circumvent) (the )?(approval|policy engine|permission checks?|audit log|broker|guardrails?)\b(?![^.\n]{0,40}\b(is|are) (never|not) )", "asks for a control to be bypassed"),
     (r"\b(grant|give) (yourself|itself|the agent) [^.\n]{0,30}\b(permission|right|access|privilege)s?\b", "asks the agent to grant itself rights"),
     (r"\bcurl\b[^\n|]{0,200}\|\s*(sudo\s+)?(ba|z)?sh\b", "pipes a download into a shell"),
-    (r"\b(print|echo|send|post|upload|exfiltrate) [^.\n]{0,40}\b(\.env|api[_ -]?keys?|secrets?|tokens?|passwords?|private keys?)\b[^.\n]{0,40}\b(to|into) (https?:|a (url|webhook|remote))", "sends secrets somewhere"),
+    (r"\b(print|echo|send|post|upload|exfiltrate) [^\n]{0,40}?(\.env\b|\b(api[_ -]?keys?|secrets?|tokens?|passwords?|private keys?)\b)[^\n]{0,40}?\b(to|into) (https?:|a (url|webhook|remote))", "sends secrets somewhere"),
     (r"</?(system|assistant|founder|ceo|tool_result|untrusted|skill)\b[^>]*>", "contains role or wrapper markup"),
     (r"\b(as|from) the (founder|ceo|system)\s*:", "speaks as the founder, the CEO or the system"),
 ]
