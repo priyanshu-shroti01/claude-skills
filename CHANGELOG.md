@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Nine internal skills (27 → 36), and a new `support` category:
+  - design: `cinematic-product-design`, `design-system`
+  - backend: `whmcs-operations`, `payment-gateways`, `php-module-packaging`
+  - security: `webhook-security`
+  - growth: `launch-playbook`
+  - support: `support-playbook`, `cpanel-whm-guide`
+- `external/`: a library of 236 third-party skills (Anthropic, claude-seo,
+  Trail of Bits, claude-flow and others) stored for copying into projects.
+  Each keeps its upstream licence; not covered by MIT, not in the plugin.
+  Indexed in `external/README.md`.
+- README hero and section illustrations (`docs/assets/`).
+
 ## [0.2.0] - 2026-09-05
 
 Claude OS becomes installable as a plugin, and the external registry grows

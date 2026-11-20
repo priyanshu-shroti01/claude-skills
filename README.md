@@ -1,9 +1,12 @@
 # Claude OS
 
+![Claude OS](docs/assets/hero.png)
+
 **A personal AI engineering, design, product and growth operating system —
 in a repository.** Clone it onto any machine, run one bootstrap, and
 Claude Code is immediately ready to work at agency level: 29 specialist
-agents, 27 skills, 15 gated workflows, persistent memory, a codebase
+agents, 36 original skills plus a library of 236 third-party skills,
+15 gated workflows, persistent memory, a codebase
 knowledge graph, a permission model with hard human gates, and the
 scripts that make all of it reproducible.
 
@@ -54,6 +57,53 @@ configs, installers, tests — is versioned here. No hidden local state.
 | Dependency licenses/audit | [docs/dependencies.md](docs/dependencies.md) |
 | Overlap rulings | [docs/architecture/skill-overlap.md](docs/architecture/skill-overlap.md) |
 
+## Skills
+
+![Original skills](docs/assets/originals.png)
+
+36 original skills in 13 categories, written for real production work and
+covered by this repo's MIT licence. Full index:
+[docs/skills/README.md](docs/skills/README.md).
+
+| Category | Skills |
+|---|---|
+| core | skill-router · quality-pipeline · memory · graph-knowledge |
+| design | design-direction · anti-slop · design-review · cinematic-product-design · design-system |
+| frontend | frontend-standards · component-quality |
+| backend | api-standards · data-safety · whmcs-operations · payment-gateways · php-module-packaging |
+| security | secure-coding · secrets-hygiene · webhook-security |
+| support | support-playbook · cpanel-whm-guide |
+| growth | growth-analysis · lead-research · launch-playbook |
+| research | research-intelligence · competitor-analysis |
+| qa | functional-qa · visual-qa |
+| seo | technical-seo · geo |
+| media | image-generation · video-generation |
+| 3d | r3f-scenes · exploded-views |
+| production | production-readiness · deployment-gates |
+
+## Skill library
+
+![Skill library](docs/assets/library.png)
+
+[`external/`](external/README.md) stores 236 third-party skills —
+Anthropic's document and design skills, the claude-seo pack, Trail of Bits
+security and fuzzing skills, the claude-flow agent skills and more — so any
+project can pull in what it needs without hunting for them again.
+
+```bash
+# copy one skill into a project
+cp -r external/seo-audit ~/work/my-site/.claude/skills/
+
+# or several at once
+for s in pdf xlsx accessibility; do cp -r external/$s ~/work/my-site/.claude/skills/; done
+```
+
+These keep their **upstream licences** (see the `LICENSE` inside each folder
+where one exists) — they are not covered by this repo's MIT licence, are not
+shipped in the plugin, and the skill-router only uses them once a project
+adds them. The table in [external/README.md](external/README.md) lists what
+each one does.
+
 ## Repository map
 
 ```
@@ -62,7 +112,8 @@ AGENTS.md            roster + hierarchy      DESIGN.md   design philosophy
 SECURITY.md          security policy         PRODUCTION_READINESS.md  ship checklist
 SYSTEM_MANIFEST.yaml versioned inventory (verify.sh cross-checks it)
 .claude/             settings, agent definitions, hooks, rules, commands, skill links
-agents/              29 extended charters    skills/     27 skills in 12 categories
+agents/              29 extended charters    skills/     36 skills in 13 categories
+external/            236 third-party skills, each under its own licence
 workflows/           15 staged processes     references/ quick sheets (numbers live here)
 integrations/        per-integration install/config docs
 scripts/             bootstrap · install · doctor · verify · status · update ·

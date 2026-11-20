@@ -41,6 +41,15 @@ require?"** Load the minimum. Name what might come later. Exclude the rest.
 | A capability the OS does not have | find-skills (external, required) — **discovery only**; adoption goes through SECURITY.md §4 before anything is installed |
 | API / server / database | api-standards, data-safety, backend-architect+engineer |
 | Auth, payments, uploads, user data | secure-coding, secrets-hygiene, security-agent (mandatory) |
+| Premium marketing site / hero / brand page | cinematic-product-design, design-system, design-direction |
+| Styling a component in a project that has a design system | design-system |
+| WHMCS module, hook, admin script or billing change | whmcs-operations, data-safety |
+| Payment gateway, callback or webhook that moves money | payment-gateways, webhook-security, secure-coding |
+| Any public endpoint callable without login | webhook-security |
+| Releasing / packaging / encoding a commercial PHP module | php-module-packaging, deployment-gates |
+| Drafting a customer support reply | support-playbook; cpanel-whm-guide for panel how-tos |
+| Hosting customer or reseller needs cPanel / WHM steps | cpanel-whm-guide |
+| Product launch, promo, waitlist or go-to-market | launch-playbook, growth-analysis |
 | Any implementation | code-reviewer (gate), functional-qa |
 | Performance concern / launch | performance-agent, deployment-gates |
 | Traffic/conversion goals | growth-analysis; lead-research only on explicit request |

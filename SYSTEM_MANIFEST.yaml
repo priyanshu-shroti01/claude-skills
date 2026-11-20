@@ -157,17 +157,18 @@ workflows:
 # ── Internal skills — skills/<category>/<name>/SKILL.md ──────────────
 skills:
   core: [skill-router, quality-pipeline, memory, graph-knowledge]
-  design: [design-direction, anti-slop, design-review]
+  design: [design-direction, anti-slop, design-review, cinematic-product-design, design-system]
   frontend: [frontend-standards, component-quality]
-  backend: [api-standards, data-safety]
+  backend: [api-standards, data-safety, whmcs-operations, payment-gateways, php-module-packaging]
   research: [research-intelligence, competitor-analysis]
-  security: [secure-coding, secrets-hygiene]
+  security: [secure-coding, secrets-hygiene, webhook-security]
   qa: [functional-qa, visual-qa]
   seo: [technical-seo, geo]
   media: [image-generation, video-generation]
   "3d": [r3f-scenes, exploded-views]
-  growth: [growth-analysis, lead-research]
+  growth: [growth-analysis, lead-research, launch-playbook]
   production: [production-readiness, deployment-gates]
+  support: [support-playbook, cpanel-whm-guide]
 
 # ── MCP integrations — templates in config/mcp/ ──────────────────────
 mcp:

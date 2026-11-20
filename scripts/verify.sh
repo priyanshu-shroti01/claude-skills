@@ -261,6 +261,10 @@ if section in ("links", "all"):
     link_re = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
     bad = 0
     for p in sorted(walk_files((".md",))):
+        # external/ holds vendored third-party skills whose relative links
+        # point into their own upstream repos; they are not ours to resolve.
+        if p.startswith("external/"):
+            continue
         in_fence = False
         for i, line in enumerate(open(p, encoding="utf-8"), 1):
             if line.strip().startswith("```"):
@@ -302,6 +306,9 @@ if section in ("secrets", "all"):
             continue
         for label, rx in patterns:
             for m in rx.finditer(text):
+                # documentation placeholders (AIzaXXXX..., A1B2C3D4...) are not keys
+                if re.search(r"X{8,}|A1B2C3D4|0123456789|EXAMPLE", m.group(0)):
+                    continue
                 pr("fail", f"possible secret ({label}) in {p}: {m.group(0)[:12]}…")
                 hits += 1
     if hits == 0:

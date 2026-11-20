@@ -9,5 +9,5 @@ if [ "$RC" -ne 0 ]; then
   exit 1
 fi
 COUNT="$(printf '%s\n' "$OUT" | grep -c '^PASS  skill:')"
-[ "$COUNT" -eq 27 ] || { echo "expected 27 verified skills, got $COUNT"; exit 1; }
+[ "$COUNT" -eq 36 ] || { echo "expected 36 verified skills, got $COUNT"; exit 1; }
 exit 0
