@@ -5,7 +5,7 @@
 **A personal AI engineering, design, product and growth operating system —
 in a repository.** Clone it onto any machine, run one bootstrap, and
 Claude Code is immediately ready to work at agency level: 29 specialist
-agents, 36 original skills plus a library of 236 third-party skills,
+agents, 42 original skills plus a library of 236 third-party skills,
 15 gated workflows, persistent memory, a codebase
 knowledge graph, a permission model with hard human gates, and the
 scripts that make all of it reproducible.
@@ -61,7 +61,7 @@ configs, installers, tests — is versioned here. No hidden local state.
 
 ![Original skills](docs/assets/originals.png)
 
-36 original skills in 13 categories, written for real production work and
+42 original skills in 17 categories, written for real production work and
 covered by this repo's MIT licence. Full index:
 [docs/skills/README.md](docs/skills/README.md).
 
@@ -71,8 +71,12 @@ covered by this repo's MIT licence. Full index:
 | design | design-direction · anti-slop · design-review · cinematic-product-design · design-system |
 | frontend | frontend-standards · component-quality |
 | backend | api-standards · data-safety · whmcs-operations · payment-gateways · php-module-packaging |
-| security | secure-coding · secrets-hygiene · webhook-security |
-| support | support-playbook · cpanel-whm-guide |
+| security | secure-coding · secrets-hygiene · webhook-security · security-assessment |
+| support | support-playbook · cpanel-whm-guide · ticket-triage |
+| executive | objective-planning |
+| infrastructure | linux-server-diagnostics |
+| operations | incident-response |
+| finance | finance-review |
 | growth | growth-analysis · lead-research · launch-playbook |
 | research | research-intelligence · competitor-analysis |
 | qa | functional-qa · visual-qa |
@@ -112,7 +116,7 @@ AGENTS.md            roster + hierarchy      DESIGN.md   design philosophy
 SECURITY.md          security policy         PRODUCTION_READINESS.md  ship checklist
 SYSTEM_MANIFEST.yaml versioned inventory (verify.sh cross-checks it)
 .claude/             settings, agent definitions, hooks, rules, commands, skill links
-agents/              29 extended charters    skills/     36 skills in 13 categories
+agents/              29 extended charters    skills/     42 skills in 17 categories
 external/            236 third-party skills, each under its own licence
 workflows/           15 staged processes     references/ quick sheets (numbers live here)
 integrations/        per-integration install/config docs

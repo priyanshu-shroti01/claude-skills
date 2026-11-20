@@ -36,7 +36,7 @@ consent. A plugin that silently adds a `PreToolUse` hook is precisely
 what `.claude/rules/security-rules.md` forbids — including when we would
 be the ones doing it.
 
-## Internal — 36 skills, 29 agents, 15 workflows
+## Internal — 42 skills, 29 agents, 15 workflows
 
 Always present, no install step, ours to fix.
 See [`README.md`](README.md) for the skill library and

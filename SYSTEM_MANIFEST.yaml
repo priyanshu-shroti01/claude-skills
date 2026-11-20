@@ -7,7 +7,7 @@
 
 system:
   name: "Claude OS"
-  version: "0.2.0"            # keep in sync with VERSION
+  version: "0.3.0"            # keep in sync with VERSION
   description: >
     Reusable AI engineering, design, product and growth operating system
     for Claude Code. GitHub-first, reproducible, permission-controlled.
@@ -157,18 +157,22 @@ workflows:
 # ── Internal skills — skills/<category>/<name>/SKILL.md ──────────────
 skills:
   core: [skill-router, quality-pipeline, memory, graph-knowledge]
+  executive: [objective-planning]
   design: [design-direction, anti-slop, design-review, cinematic-product-design, design-system]
   frontend: [frontend-standards, component-quality]
   backend: [api-standards, data-safety, whmcs-operations, payment-gateways, php-module-packaging]
   research: [research-intelligence, competitor-analysis]
-  security: [secure-coding, secrets-hygiene, webhook-security]
+  security: [secure-coding, secrets-hygiene, webhook-security, security-assessment]
   qa: [functional-qa, visual-qa]
   seo: [technical-seo, geo]
   media: [image-generation, video-generation]
   "3d": [r3f-scenes, exploded-views]
   growth: [growth-analysis, lead-research, launch-playbook]
   production: [production-readiness, deployment-gates]
-  support: [support-playbook, cpanel-whm-guide]
+  support: [support-playbook, cpanel-whm-guide, ticket-triage]
+  infrastructure: [linux-server-diagnostics]
+  operations: [incident-response]
+  finance: [finance-review]
 
 # ── MCP integrations — templates in config/mcp/ ──────────────────────
 mcp:

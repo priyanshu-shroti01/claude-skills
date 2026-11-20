@@ -48,6 +48,12 @@ require?"** Load the minimum. Name what might come later. Exclude the rest.
 | Any public endpoint callable without login | webhook-security |
 | Releasing / packaging / encoding a commercial PHP module | php-module-packaging, deployment-gates |
 | Drafting a customer support reply | support-playbook; cpanel-whm-guide for panel how-tos |
+| Sorting or routing incoming tickets and messages | ticket-triage |
+| An objective to plan, decompose and delegate (CEO, commander, department head) | objective-planning |
+| Server health, outage or slowness on a Linux / cPanel / CloudLinux host | linux-server-diagnostics |
+| Something broken or compromised for users right now; alert triage | incident-response, linux-server-diagnostics |
+| Security audit, access-control or dependency review | security-assessment, secure-coding |
+| Expenses, budget, invoices, profit, "can we afford it" | finance-review |
 | Hosting customer or reseller needs cPanel / WHM steps | cpanel-whm-guide |
 | Product launch, promo, waitlist or go-to-market | launch-playbook, growth-analysis |
 | Any implementation | code-reviewer (gate), functional-qa |

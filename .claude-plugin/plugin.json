@@ -1,8 +1,8 @@
 {
   "name": "claude-os",
   "displayName": "Claude OS",
-  "version": "0.2.0",
-  "description": "An AI engineering, design, product and growth operating system: 29 specialist agents, 36 skills and 8 commands, with permission ceilings, adversarial review and quality gates wired in.",
+  "version": "0.3.0",
+  "description": "An AI engineering, design, product and growth operating system: 29 specialist agents, 42 skills and 8 commands, with permission ceilings, adversarial review and quality gates wired in.",
   "author": {
     "name": "priyanshu-shroti01",
     "url": "https://github.com/priyanshu-shroti01"
@@ -35,7 +35,11 @@
     "./skills/3d",
     "./skills/growth",
     "./skills/production",
-    "./skills/support"
+    "./skills/support",
+    "./skills/executive",
+    "./skills/infrastructure",
+    "./skills/operations",
+    "./skills/finance"
   ],
   "agents": "./.claude/agents",
   "commands": "./.claude/commands",
