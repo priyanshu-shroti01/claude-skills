@@ -60,3 +60,5 @@ playwright-report/
 test-results/
 screenshots/
 lighthouse-reports/
+.gstack/
+.pybin/
