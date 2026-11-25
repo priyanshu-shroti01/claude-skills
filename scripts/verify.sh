@@ -134,6 +134,10 @@ if section in ("syntax", "all"):
         except Exception as e:
             pr("fail", f"json invalid: {p}: {e}")
     for p in sorted(walk_files((".yaml", ".yml"))):
+        # Vendored third-party templates (multi-document Kubernetes YAML and the
+        # like) are stored as published, not parsed as our configuration.
+        if p.startswith(("external/", "external-agents/")):
+            continue
         try:
             load_yaml(p)
             pr("pass", f"yaml: {p}")
@@ -261,9 +265,10 @@ if section in ("links", "all"):
     link_re = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
     bad = 0
     for p in sorted(walk_files((".md",))):
-        # external/ holds vendored third-party skills whose relative links
-        # point into their own upstream repos; they are not ours to resolve.
-        if p.startswith("external/"):
+        # external/ and external-agents/ hold vendored third-party skills and
+        # agents whose relative links point into their own upstream repos;
+        # they are not ours to resolve.
+        if p.startswith(("external/", "external-agents/")):
             continue
         in_fence = False
         for i, line in enumerate(open(p, encoding="utf-8"), 1):
@@ -306,8 +311,12 @@ if section in ("secrets", "all"):
             continue
         for label, rx in patterns:
             for m in rx.finditer(text):
-                # documentation placeholders (AIzaXXXX..., A1B2C3D4...) are not keys
-                if re.search(r"X{8,}|A1B2C3D4|0123456789|EXAMPLE", m.group(0)):
+                # documentation placeholders (AIzaXXXX..., A1B2C3D4..., ghp_aaaa...) are not keys
+                if re.search(r"X{8,}|A1B2C3D4|0123456789|EXAMPLE|(.)\1{15,}", m.group(0)):
+                    continue
+                # a key header with no key body after it (a scanner's regex, a
+                # checklist row, a truncated test fixture) is not a key
+                if label == "private key block" and not re.search(r"[A-Za-z0-9+/=]{60,}", text[m.end():m.end() + 400]):
                     continue
                 pr("fail", f"possible secret ({label}) in {p}: {m.group(0)[:12]}…")
                 hits += 1
